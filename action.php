@@ -10,19 +10,19 @@ if(!defined('DOKU_INC')) die();
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 require_once(DOKU_PLUGIN.'action.php');
 
-class action_plugin_creole extends DokuWiki_Action_Plugin {
+class action_plugin_mediasyntax extends DokuWiki_Action_Plugin {
 
   /**
    * return some info
    */
   function getInfo(){
     return array(
-      'author' => 'Gina Häußge, Michael Klier, Esther Brunner',
-      'email'  => 'dokuwiki@chimeric.de',
-      'date'   => '2008-02-12',
-      'name'   => 'Creole Plugin',
-      'desc'   => 'Changes the editor toolbar if markup precedence is set to Creole',
-      'url'    => 'http://wiki.splitbrain.org/plugin:creole',
+      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
+      'email'  => 'dev@staerk.de',
+      'date'   => '2010-03-29',
+      'name'   => 'Mediasyntax Plugin',
+      'desc'   => 'Changes the editor toolbar if markup precedence is set to Mediasyntax',
+      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
     );
   }
 
@@ -44,7 +44,7 @@ class action_plugin_creole extends DokuWiki_Action_Plugin {
    */
   function define_toolbar(&$event, $param){
     // return false;  
-    if ($this->getConf('precedence') != 'creole') return false; // leave untouched
+    if ($this->getConf('precedence') != 'mediasyntax') return false; // leave untouched
         
     $c = count($event->data);
     for ($i = 0; $i <= $c; $i++){
