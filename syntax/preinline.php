@@ -1,6 +1,6 @@
 <?php
 /**
- * Creole Plugin, inline preformatted component: Creole style preformatted text
+ * Mediasyntax Plugin, inline preformatted component: Mediawiki style preformatted text
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Esther Brunner <wikidesign@gmail.com>
@@ -16,16 +16,16 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_creole_preinline extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_mediasyntax_preinline extends DokuWiki_Syntax_Plugin {
  
   function getInfo(){
     return array(
-      'author' => 'Gina Häußge, Michael Klier, Esther Brunner',
-      'email'  => 'dokuwiki@chimeric.de',
-      'date'   => '2008-02-12',
-      'name'   => 'Creole Plugin, inline preformatted component',
-      'desc'   => 'Creole style preformatted text',
-      'url'    => 'http://wiki.splitbrain.org/plugin:creole',
+      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
+      'email'  => 'dev@staerk.de',
+      'date'   => '2010-03-29',
+      'name'   => 'Mediasyntax Plugin, inline preformatted component',
+      'desc'   => 'Mediawiki style preformatted text',
+      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
     );
   }
 
@@ -36,14 +36,14 @@ class syntax_plugin_creole_preinline extends DokuWiki_Syntax_Plugin {
     $this->Lexer->addEntryPattern(
       '\{\{\{(?=.*?\}\}\})',
       $mode,
-      'plugin_creole_preinline'
+      'plugin_mediasyntax_preinline'
     );
   }
   
   function postConnect(){
     $this->Lexer->addExitPattern(
       '\}\}\}',
-      'plugin_creole_preinline'
+      'plugin_mediasyntax_preinline'
     );
   }
   

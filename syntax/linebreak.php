@@ -1,6 +1,6 @@
 <?php
 /**
- * Creole Plugin, linebreak component: Inserts a line break
+ * Mediasyntax Plugin, linebreak component: Inserts a line break
  * based on Linebreak Plugin http://wiki.splitbrain.org/plugin:linebreak
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
@@ -18,16 +18,16 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_creole_linebreak extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_mediasyntax_linebreak extends DokuWiki_Syntax_Plugin {
  
   function getInfo(){
     return array(
-      'author' => 'Gina Häußge, Michael Klier, Christopher Smith',
-      'email'  => 'dokuwiki@chimeric.de',
-      'date'   => '2008-02-12',
-      'name'   => 'Creole Plugin (linebreak component)',
+      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Christopher Smith',
+      'email'  => 'dev@staerk.de',
+      'date'   => '2010-03-29',
+      'name'   => 'Mediasyntax Plugin (linebreak component)',
       'desc'   => 'Provide a line break for a new line in the raw wiki data',
-      'url'    => 'http://wiki.splitbrain.org/plugin:creole',
+      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
     );
   }
 
@@ -38,7 +38,7 @@ class syntax_plugin_creole_linebreak extends DokuWiki_Syntax_Plugin {
     $this->Lexer->addSpecialPattern(
       '(?<!^|\n)\n(?!\n|>)',
       $mode,
-      'plugin_creole_linebreak'
+      'plugin_mediasyntax_linebreak'
     ); 
   }
 

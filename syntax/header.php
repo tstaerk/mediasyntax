@@ -1,6 +1,6 @@
 <?php
 /**
- * Creole Plugin, header component: Creole style headers
+ * Mediasyntax Plugin, header component: Mediawiki style headers
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Esther Brunner <wikidesign@gmail.com>
@@ -16,16 +16,16 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_creole_header extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_mediasyntax_header extends DokuWiki_Syntax_Plugin {
  
   function getInfo(){
     return array(
-      'author' => 'Gina Häußge, Michael Klier, Esther Brunner',
-      'email'  => 'dokuwiki@chimeric.de',
-      'date'   => '2008-02-12',
-      'name'   => 'Creole Plugin, header component',
-      'desc'   => 'Creole style headers',
-      'url'    => 'http://wiki.splitbrain.org/plugin:creole',
+      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
+      'email'  => 'dev@staerk.de',
+      'date'   => '2010-03-29',
+      'name'   => 'Mediasyntax Plugin, header component',
+      'desc'   => 'Mediawiki style headers',
+      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
     );
   }
 
@@ -41,7 +41,7 @@ class syntax_plugin_creole_header extends DokuWiki_Syntax_Plugin {
     $this->Lexer->addSpecialPattern(
       '(?m)^[ \t]*=+[^\n]+=*[ \t]*$',
       'base',
-      'plugin_creole_header'
+      'plugin_mediasyntax_header'
     );
   }
   
@@ -53,7 +53,7 @@ class syntax_plugin_creole_header extends DokuWiki_Syntax_Plugin {
     if (($this->getConf('precedence') == 'dokuwiki')
       && ($title{strlen($title) - 1} == '=')){ // DokuWiki
       $level = 7 - strspn($title, '=');
-    } else {                                   // Creole
+    } else {                                   // Mediasyntax
       $level = strspn($title, '=');
     }
     if ($level < 1) $level = 1;

@@ -20,12 +20,12 @@ class syntax_plugin_creole_listblock extends DokuWiki_Syntax_Plugin {
  
   function getInfo(){
     return array(
-      'author' => 'Gina Häußge, Michael Klier, Esther Brunner',
-      'email'  => 'dokuwiki@chimeric.de',
-      'date'   => '2008-02-12',
-      'name'   => 'Creole Plugin, listblock component',
-      'desc'   => 'Creole style ordered and unorderered lists',
-      'url'    => 'http://wiki.splitbrain.org/plugin:creole',
+      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
+      'email'  => 'dev@staerk.de',
+      'date'   => '2010-03-29',
+      'name'   => 'Mediasyntax Plugin, listblock component',
+      'desc'   => 'Mediawiki style ordered and unorderered lists',
+      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
     );
   }
 
@@ -41,18 +41,18 @@ class syntax_plugin_creole_listblock extends DokuWiki_Syntax_Plugin {
     $this->Lexer->addEntryPattern(
       '\n[ \t]*[\#\*](?!\*)',
       $mode,
-      'plugin_creole_listblock'
+      'plugin_mediasyntax_listblock'
     );
     $this->Lexer->addPattern(
       '\n[ \t]*[\#\*\-]+',
-      'plugin_creole_listblock'
+      'plugin_mediasyntax_listblock'
     );
   }
   
   function postConnect(){
     $this->Lexer->addExitPattern(
       '\n',
-      'plugin_creole_listblock'
+      'plugin_mediasyntax_listblock'
     );
   }
   
@@ -60,7 +60,7 @@ class syntax_plugin_creole_listblock extends DokuWiki_Syntax_Plugin {
     switch ($state){
       case DOKU_LEXER_ENTER:
         $ReWriter = & new Doku_Handler_List($handler->CallWriter);
-        $ReWriter = & new Doku_Handler_Creole_List($handler->CallWriter);
+        $ReWriter = & new Doku_Handler_Mediasyntax_List($handler->CallWriter);
         $handler->CallWriter = & $ReWriter;
         $handler->_addCall('list_open', array($match), $pos);
         break;
@@ -85,14 +85,14 @@ class syntax_plugin_creole_listblock extends DokuWiki_Syntax_Plugin {
   }
 }
 
-/* ----- Creole List Call Writer ----- */
+/* ----- Mediasyntax List Call Writer ----- */
 
-class Doku_Handler_Creole_List extends Doku_Handler_List {
+class Doku_Handler_Mediasyntax_List extends Doku_Handler_List {
 
   function interpretSyntax($match, &$type){
     if (substr($match,-1) == '*') $type = 'u';
     else $type = 'o';
-    $level = strlen(trim($match));  // Creole
+    $level = strlen(trim($match));  // Mediasyntax
     if ($level <= 1){
       $c = count(explode('  ',str_replace("\t",'  ',$match)));
       if ($c > $level) $level = $c; // DokuWiki
