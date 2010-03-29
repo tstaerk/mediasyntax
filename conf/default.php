@@ -1,8 +1,8 @@
 <?php
 /**
- * Options for the Creole Plugin
+ * Options for the Mediasyntax Plugin
  */
-$conf['precedence'] = 'dokuwiki';  // markup precedence when conflicting:
-                                   // 'dokuwiki' (default) or 'creole'
+$conf['precedence'] = 'mediasyntax';  // markup precedence when conflicting:
+                                      // 'dokuwiki' or 'mediasyntax'
 
 //Setup VIM: ex: et ts=2 enc=utf-8 :
