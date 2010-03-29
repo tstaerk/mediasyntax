@@ -9,6 +9,6 @@
 // for the configuration manager
 $lang['precedence']            = 'Vorrang für Syntax-Dialekt';
 $lang['precedence_o_dokuwiki'] = 'DokuWiki';
-$lang['precedence_o_creole']   = 'Creole';
+$lang['precedence_o_mediasyntax']   = 'Mediasyntax';
 
 //Setup VIM: ex: et ts=2 enc=utf-8 :
