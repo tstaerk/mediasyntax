@@ -1,6 +1,6 @@
 <?php
 /**
- * Creole Plugin, listblock component: Creole style ordered and unordered lists
+ * Mediasyntax Plugin, listblock component: Mediawiki style ordered and unordered lists
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Esther Brunner <wikidesign@gmail.com>
@@ -16,7 +16,7 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_creole_listblock extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin {
  
   function getInfo(){
     return array(
