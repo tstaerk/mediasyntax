@@ -39,7 +39,7 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin {
   
   function connectTo($mode){
     $this->Lexer->addEntryPattern(
-      '\n[ \t]*[\#\*](?!\*)',
+      '\n[ \t]*[\#\*](?!\*) *',
       $mode,
       'plugin_mediasyntax_listblock'
     );
@@ -91,7 +91,7 @@ class Doku_Handler_Mediasyntax_List extends Doku_Handler_List {
 
   function interpretSyntax($match, &$type){
     if (substr($match,-1) == '*') $type = 'u';
-    else $type = 'o';
+    else $type = 'u';
     $level = strlen(trim($match));  // Mediasyntax
     if ($level <= 1){
       $c = count(explode('  ',str_replace("\t",'  ',$match)));

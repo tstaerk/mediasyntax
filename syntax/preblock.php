@@ -35,7 +35,7 @@ class syntax_plugin_mediasyntax_preblock extends DokuWiki_Syntax_Plugin {
   
   function connectTo($mode){
     $this->Lexer->addEntryPattern(
-      '\n\{\{\{\n(?=.*?\n\}\}\}\n)',
+      '^ (?=.*?\n)',
       $mode,
       'plugin_mediasyntax_preblock'
     );
@@ -43,7 +43,7 @@ class syntax_plugin_mediasyntax_preblock extends DokuWiki_Syntax_Plugin {
   
   function postConnect(){
     $this->Lexer->addExitPattern(
-      '\n\}\}\}\n',
+      '\n',
       'plugin_mediasyntax_preblock'
     );
   }
