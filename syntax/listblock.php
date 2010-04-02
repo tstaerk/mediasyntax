@@ -44,7 +44,7 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin {
       'plugin_mediasyntax_listblock'
     );
     $this->Lexer->addPattern(
-      '\n[ \t]*[\#\*\-]+',
+      '\n[ \t]*[\#\*\-]+ *',
       'plugin_mediasyntax_listblock'
     );
   }
