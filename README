@@ -11,3 +11,7 @@ All documentation for the Mediasyntax Plugin is available online at:
 (c) 2010 by Thorsten Stärk <dev@staerk.de>
 
 See COPYING for license info.
+
+Change history:
+2010-03-29: 2 hours: created mediasyntax from creole plugin
+2010-04-02: 4 hours: single blank at beginning of line makes preformatted text
