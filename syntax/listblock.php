@@ -90,8 +90,20 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin {
 class Doku_Handler_Mediasyntax_List extends Doku_Handler_List {
 
   function interpretSyntax($match, &$type){
+$handle=fopen("/tmp/dokuwiki.log","a");
+$match=substr($match,1);
+fwrite($handle, "match is >$match<\n");
+$pos=strpos($match,"*");
+fwrite($handle, "pos is $pos\n");
+if ($pos===false) fwrite($handle, "pos is false\n");
+fclose ($handle);
     if (substr($match,-1) == '*') $type = 'u';
-    else $type = 'u';
+    else $type = 'o';
+    if (substr($match,-2) == '*') $type = 'u';
+    if (substr($match,0) == '*') $type = 'u';
+if ($pos===false) $type="o";
+else $type="u";
+    //if ($pos==0) $type="u";
     $level = strlen(trim($match));  // Mediasyntax
     if ($level <= 1){
       $c = count(explode('  ',str_replace("\t",'  ',$match)));
