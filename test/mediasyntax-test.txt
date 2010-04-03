@@ -1,0 +1,19 @@
+= heading 1 =
+== heading 2 ==
+=== heading 3 ===
+==== heading 4 ====
+
+ preformatted text
+ preformatted text starting one line later
+
+* unordered list item
+** unordered list item, second level
+* unordered list item first level under unordered list item second level
+
+*unordered list item without space after asterisk
+
+# ordered list item
+# ordered list item 2
+## ordered list item second level
+normal text
+
