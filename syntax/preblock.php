@@ -39,11 +39,6 @@ class syntax_plugin_mediasyntax_preblock extends DokuWiki_Syntax_Plugin {
       $mode,
       'plugin_mediasyntax_preblock'
     );
-    $this->Lexer->addPattern(
-      '^ (?=.*?)',
-      $mode,
-      'plugin_mediasyntax_preblock'
-    );
   }
   
   function postConnect(){
