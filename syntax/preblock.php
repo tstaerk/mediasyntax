@@ -39,11 +39,20 @@ class syntax_plugin_mediasyntax_preblock extends DokuWiki_Syntax_Plugin {
       $mode,
       'plugin_mediasyntax_preblock'
     );
+    $this->Lexer->addEntryPattern(
+      '<pre>',
+      $mode,
+      'plugin_mediasyntax_preblock'
+    );
   }
   
   function postConnect(){
     $this->Lexer->addExitPattern(
       '\n(?=[^ ].*?)',
+      'plugin_mediasyntax_preblock'
+    );
+    $this->Lexer->addExitPattern(
+      '</pre>',
       'plugin_mediasyntax_preblock'
     );
   }

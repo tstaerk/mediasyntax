@@ -2,7 +2,7 @@
 
 All documentation for the Mediasyntax Plugin is available online at:
 
-  * http://wiki.splitbrain.org/plugin:mediasyntax
+  * http://www.staerk.de/thorsten/index.php/Mediasyntax
 
 ----
 
@@ -17,3 +17,4 @@ Change history:
 2010-04-02: 4 hours: single blank at beginning of line makes preformatted text
 2010-04-03: 1 hour:  testcase & two adjacent preformatted lines fix
 2010-04-08: 1 hour:  version updated
+2010-04-10: 3 hours: possibility to use the <pre> tag

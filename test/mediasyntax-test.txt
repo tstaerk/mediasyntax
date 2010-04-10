@@ -6,6 +6,8 @@
  preformatted text
  preformatted text starting one line later
 
+<pre>Preformatted text inside a "pre"-tag</pre>
+
 * unordered list item
 ** unordered list item, second level
 * unordered list item first level under unordered list item second level
