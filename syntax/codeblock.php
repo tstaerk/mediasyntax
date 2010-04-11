@@ -16,14 +16,14 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_mediasyntax_preblock extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin {
  
   function getInfo(){
     return array(
       'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
       'email'  => 'dev@staerk.de',
       'date'   => '2010-03-29',
-      'name'   => 'Mediasyntax Plugin, preformatted block component',
+      'name'   => 'Mediasyntax Plugin, code-formatted block component',
       'desc'   => 'Mediasyntax style preformatted text',
       'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
     );
@@ -35,16 +35,16 @@ class syntax_plugin_mediasyntax_preblock extends DokuWiki_Syntax_Plugin {
   
   function connectTo($mode){
     $this->Lexer->addEntryPattern(
-      '<pre>',
+      '\n(?= .*?)',
       $mode,
-      'plugin_mediasyntax_preblock'
+      'plugin_mediasyntax_codeblock'
     );
   }
   
   function postConnect(){
     $this->Lexer->addExitPattern(
-      '</pre>',
-      'plugin_mediasyntax_preblock'
+      '\n(?=[^ ].*?)',
+      'plugin_mediasyntax_codeblock'
     );
   }
   

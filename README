@@ -18,3 +18,4 @@ Change history:
 2010-04-03: 1 hour:  testcase & two adjacent preformatted lines fix
 2010-04-08: 1 hour:  version updated
 2010-04-10: 3 hours: possibility to use the <pre> tag
+2010-04-11: 1 hour:  <pre> tag must not be interrupted by a line starting with a character that is not a space
