@@ -52,7 +52,9 @@ class syntax_plugin_mediasyntax_link extends DokuWiki_Syntax_Plugin {
     if ($state == DOKU_LEXER_UNMATCHED){
       $target="http".$match;
       $targets=explode(' ',$target);
-      $handler->_addCall('externallink', array($targets[0],$targets[1]), $pos);
+      $cleartext="hf";
+      $cleartext=preg_replace("/^(.*?) /", "", $match);
+      $handler->_addCall('externallink', array($targets[0],$cleartext), $pos);
     }
 
     return true;
