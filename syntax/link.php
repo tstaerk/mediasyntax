@@ -3,7 +3,7 @@
  * Mediasyntax Plugin, preformatted block component: Mediawiki style preformatted text
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
- * @author     Esther Brunner <wikidesign@gmail.com>
+ * @author     Thorsten Staerk
  */
  
 // must be run within Dokuwiki
@@ -20,11 +20,11 @@ class syntax_plugin_mediasyntax_link extends DokuWiki_Syntax_Plugin {
  
   function getInfo(){
     return array(
-      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
+      'author' => 'Thorsten Stärk',
       'email'  => 'dev@staerk.de',
       'date'   => '2010-03-29',
-      'name'   => 'Mediasyntax Plugin, preformatted block component',
-      'desc'   => 'Mediasyntax style preformatted text',
+      'name'   => 'Mediasyntax Plugin, link component',
+      'desc'   => 'Mediasyntax style links',
       'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
     );
   }
