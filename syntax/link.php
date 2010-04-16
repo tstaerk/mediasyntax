@@ -1,6 +1,6 @@
 <?php
 /**
- * Mediasyntax Plugin, preformatted block component: Mediawiki style preformatted text
+ * Mediasyntax Plugin, external link component: Mediawiki style external links
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Thorsten Staerk
@@ -16,13 +16,14 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_mediasyntax_link extends DokuWiki_Syntax_Plugin {
- 
-  function getInfo(){
+class syntax_plugin_mediasyntax_link extends DokuWiki_Syntax_Plugin 
+{
+  function getInfo()
+  {
     return array(
       'author' => 'Thorsten Stärk',
       'email'  => 'dev@staerk.de',
-      'date'   => '2010-03-29',
+      'date'   => '2010-04-15',
       'name'   => 'Mediasyntax Plugin, link component',
       'desc'   => 'Mediasyntax style links',
       'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
@@ -33,7 +34,8 @@ class syntax_plugin_mediasyntax_link extends DokuWiki_Syntax_Plugin {
   function getPType(){ return 'block'; }
   function getSort(){ return 101; }
   
-  function connectTo($mode){
+  function connectTo($mode)
+  {
     $this->Lexer->addEntryPattern(
       '\[http(?=.*?\])',
       $mode,
@@ -41,29 +43,27 @@ class syntax_plugin_mediasyntax_link extends DokuWiki_Syntax_Plugin {
     );
   }
   
-  function postConnect(){
+  function postConnect()
+  {
     $this->Lexer->addExitPattern(
       '\]',
       'plugin_mediasyntax_link'
     );
   }
   
-  function handle($match, $state, $pos, &$handler){
-    if ($state == DOKU_LEXER_UNMATCHED){
+  function handle($match, $state, $pos, &$handler)
+  {
+    if ($state == DOKU_LEXER_UNMATCHED)
+    {
       $target="http".$match;
       $targets=explode(' ',$target);
-      $cleartext="hf";
       $cleartext=preg_replace("/^(.*?) /", "", $match);
       $handler->_addCall('externallink', array($targets[0],$cleartext), $pos);
     }
-
     return true;
   }
   
-  function render($mode, &$renderer, $data){
-    //$renderer->doc .= "data is $data";
-    return true;
-  }
+  function render($mode, &$renderer, $data) { return true; }
 }
      
 //Setup VIM: ex: et ts=4 enc=utf-8 :
