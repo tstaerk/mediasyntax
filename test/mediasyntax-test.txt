@@ -22,5 +22,8 @@ line 2
 # ordered list item
 # ordered list item 2
 ## ordered list item second level
+
+[http://www.staerk.de/thorsten this is an external link]
+
 normal text
 
