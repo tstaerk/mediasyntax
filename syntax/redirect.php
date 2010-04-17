@@ -24,7 +24,7 @@ class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin
     return array(
       'author' => 'Thorsten Stärk',
       'email'  => 'dev@staerk.de',
-      'date'   => '2010-04-15',
+      'date'   => '2010-04-17',
       'name'   => 'Mediasyntax Plugin, redirect component',
       'desc'   => 'Mediasyntax style redirects',
       'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
@@ -42,6 +42,16 @@ class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin
       $mode,
       'plugin_mediasyntax_redirect'
     );
+    $this->Lexer->addEntryPattern(
+      '^[\#]*redirect[ ]+\[\[',
+      $mode,
+      'plugin_mediasyntax_redirect'
+    );
+    $this->Lexer->addEntryPattern(
+      '^[\#]*reDirect[ ]+\[\[',
+      $mode,
+      'plugin_mediasyntax_redirect'
+    );
   }
   
   function postConnect()
@@ -56,9 +66,7 @@ class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin
   {
     if ($state == DOKU_LEXER_UNMATCHED)
     {
-      $target="this is handle".$match;
-      $handler->_addCall('preformatted', array($target), $pos);
-      return $match;
+      if ($pos==13) return $match; // position must be at the beginning of the page
     }
   }
   
