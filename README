@@ -8,6 +8,7 @@ All documentation for the Mediasyntax Plugin is available online at:
 
 (c) 2005 - 2007 by Esther Brunner <wikidesign@gmail.com>
 (c) 2008 by Gina Häußge, Michael Klier <dokuwiki@chimeric.de>
+(c) 2006 by Allen Ormond <aormond atgmaildotcom> (was goto plugin, now redirect component)
 (c) 2010 by Thorsten Stärk <dev@staerk.de>
 
 See COPYING for license info.
@@ -21,3 +22,4 @@ Change history:
 2010-04-11: 1 hour:  <pre> tag must not be interrupted by a line starting with a character that is not a space
 2010-04-15: 3 hours: external links work
 2010-04-16: 1 hour:  testcase for external link
+2010-04-17: 2 hours: adapting goto plugin by Allen Ormond to become the redirect component

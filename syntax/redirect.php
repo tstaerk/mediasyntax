@@ -1,7 +1,8 @@
 <?php
 /**
  * Mediasyntax Plugin, redirect component: Mediawiki style redirects
- * 
+ * based on the cool goto plugin by Allen Ormond
+ *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Thorsten Staerk
  */
@@ -64,7 +65,7 @@ class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin
   function render($mode, &$renderer, $data) 
   {
     $renderer->doc .= "data is >".$data."<";
-    if (strlen($data)>2)
+    if (strlen($data)>0)
     {
       $renderer->doc .= "writing script";
       $renderer->doc .= '<script>url="'.wl($data).'";setTimeout("location.href=url",'.(5000).');</script>';
