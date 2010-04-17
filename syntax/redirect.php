@@ -53,20 +53,22 @@ class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin
   
   function handle($match, $state, $pos, &$handler)
   {
-    if ($state == DOKU_LEXER_MATCHED)
+    if ($state == DOKU_LEXER_UNMATCHED)
     {
       $target="this is handle".$match;
       $handler->_addCall('preformatted', array($target), $pos);
+      return $match;
     }
-    
-    return array($match);
   }
   
   function render($mode, &$renderer, $data) 
   {
-    $renderer->doc .= "data is >".$data[0]."<";
-    if (strlen($data[0])>3)
-      $renderer->doc .= '<script>url="'.wl($data[0]).'";setTimeout("location.href=url",'.(5000).');</script>';
+    $renderer->doc .= "data is >".$data."<";
+    if (strlen($data)>2)
+    {
+      $renderer->doc .= "writing script";
+      $renderer->doc .= '<script>url="'.wl($data).'";setTimeout("location.href=url",'.(5000).');</script>';
+    }
     return true; 
   }
 }
