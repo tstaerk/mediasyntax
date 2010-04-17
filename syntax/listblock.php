@@ -31,7 +31,7 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin {
 
   function getType(){ return 'container'; }
   function getPType(){ return 'block'; }
-  function getSort(){ return 9; }
+  function getSort(){ return 50; }
   
   function getAllowedTypes(){
     return array('formatting', 'substition', 'disabled', 'protected');
