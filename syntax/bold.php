@@ -38,7 +38,7 @@ class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin {
   
   function connectTo($mode){
     $this->Lexer->addEntryPattern(
-      '(?=\'\'\'.*?)',
+      '(?=\'\'\'.*?\'\'\')',
       $mode,
       'plugin_mediasyntax_bold'
     );
