@@ -17,7 +17,7 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * need to inherit from this class
  */
 class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin {
- 
+
   function getInfo()
   {
     return array(
@@ -30,44 +30,39 @@ class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin {
     );
   }
 
-  function getType(){ return 'protected'; }
-  function getPType(){ return 'block'; }
-  function getSort()
-  { 
-    return 99; // returning a value >= 100 makes it not work.
-  }
-  
-  function connectTo($mode)
+  function getType() { return 'substition'; }
+  function getSort() { return 32; }
+ 
+  function connectTo($mode) 
   {
-    $this->Lexer->addEntryPattern(
-      '(?=\'\'\'.*?\'\'\')',
-      $mode,
-      'plugin_mediasyntax_bold'
-    );
+    $this->Lexer->addSpecialPattern('\'\'\'',$mode,'plugin_mediasyntax_bold');
   }
-  
-  function postConnect()
+ 
+  function handle($match, $state, $pos, &$handler) 
   {
-    $this->Lexer->addExitPattern(
-      '\n(?=[^ ].*?)',
-      'plugin_mediasyntax_bold'
-    );
+    return array($match, $state, $pos);
   }
-  
-  function handle($match, $state, $pos, &$handler)
+ 
+  function render($mode, &$renderer, $data) 
   {
-    if ($state == DOKU_LEXER_UNMATCHED)
+    GLOBAL $bold;
+    if($mode == 'xhtml')
     {
-      $handler->_addCall('bold', array($match), $pos);
+      if (!$bold) 
+      {
+        $renderer->doc .= "<b>";
+        $bold=true;
+      }
+      else
+      {
+        $renderer->doc .= "</b>";
+        $bold=false;
+      }
+      return true;
     }
-    return $match;
+    return false;
   }
-  
-  function render($mode, &$renderer, $data)
-  {
-    $renderer->doc .= "<b>".substr($data,3,strlen($data)-6);
-    return true;
-  }
+
 }
      
 //Setup VIM: ex: et ts=4 enc=utf-8 :
