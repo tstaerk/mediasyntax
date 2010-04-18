@@ -18,7 +18,8 @@ require_once(DOKU_PLUGIN.'syntax.php');
  */
 class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin {
  
-  function getInfo(){
+  function getInfo()
+  {
     return array(
       'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
       'email'  => 'dev@staerk.de',
@@ -36,7 +37,8 @@ class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin {
     return 99; // returning a value >= 100 makes it not work.
   }
   
-  function connectTo($mode){
+  function connectTo($mode)
+  {
     $this->Lexer->addEntryPattern(
       '(?=\'\'\'.*?\'\'\')',
       $mode,
@@ -44,21 +46,25 @@ class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin {
     );
   }
   
-  function postConnect(){
+  function postConnect()
+  {
     $this->Lexer->addExitPattern(
       '\n(?=[^ ].*?)',
       'plugin_mediasyntax_bold'
     );
   }
   
-  function handle($match, $state, $pos, &$handler){
-    if ($state == DOKU_LEXER_UNMATCHED){
+  function handle($match, $state, $pos, &$handler)
+  {
+    if ($state == DOKU_LEXER_UNMATCHED)
+    {
       $handler->_addCall('bold', array($match), $pos);
     }
     return $match;
   }
   
-  function render($mode, &$renderer, $data){
+  function render($mode, &$renderer, $data)
+  {
     $renderer->doc .= "<b>".substr($data,3,strlen($data)-6);
     return true;
   }
