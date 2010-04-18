@@ -48,17 +48,10 @@ class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin {
     GLOBAL $bold;
     if($mode == 'xhtml')
     {
-      if (!$bold) 
-      {
-        $renderer->doc .= "<b>";
-        $bold=true;
-      }
-      else
-      {
-        $renderer->doc .= "</b>";
-        $bold=false;
-      }
-      return true;
+      if (!$bold) $renderer->doc .= "<b>";
+      else $renderer->doc .= "</b>";
+      if ($bold) $bold=false;
+      else $bold=true;
     }
     return false;
   }
