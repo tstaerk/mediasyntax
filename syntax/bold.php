@@ -3,7 +3,7 @@
  * Mediasyntax Plugin, bold component: Mediawiki style bold text
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
- * @author     Esther Brunner <wikidesign@gmail.com>
+ * @author     Thorsten Staerk
  */
  
 // must be run within Dokuwiki
@@ -21,9 +21,9 @@ class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin {
   function getInfo()
   {
     return array(
-      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
+      'author' => 'Thorsten Stärk',
       'email'  => 'dev@staerk.de',
-      'date'   => '2010-03-29',
+      'date'   => '2010-04-18',
       'name'   => 'Mediasyntax Plugin, bold component',
       'desc'   => 'Mediasyntax style bold text',
       'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
