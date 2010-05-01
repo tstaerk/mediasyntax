@@ -16,9 +16,10 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_mediasyntax_header extends DokuWiki_Syntax_Plugin {
- 
-  function getInfo(){
+class syntax_plugin_mediasyntax_header extends DokuWiki_Syntax_Plugin 
+{
+  function getInfo()
+  {
     return array(
       'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
       'email'  => 'dev@staerk.de',
@@ -33,11 +34,13 @@ class syntax_plugin_mediasyntax_header extends DokuWiki_Syntax_Plugin {
   function getPType(){ return 'block'; }
   function getSort(){ return 49; }
   
-  function getAllowedTypes(){
+  function getAllowedTypes()
+  {
     return array('formatting', 'substition', 'disabled', 'protected');
   }
   
-  function preConnect(){
+  function preConnect()
+  {
     $this->Lexer->addSpecialPattern(
       '(?m)^[ \t]*=+[^\n]+=*[ \t]*$',
       'base',
@@ -45,15 +48,18 @@ class syntax_plugin_mediasyntax_header extends DokuWiki_Syntax_Plugin {
     );
   }
   
-  function handle($match, $state, $pos, &$handler){
+  function handle($match, $state, $pos, &$handler)
+  {
     global $conf;
     
     // get level and title
     $title = trim($match);
     if (($this->getConf('precedence') == 'dokuwiki')
-      && ($title{strlen($title) - 1} == '=')){ // DokuWiki
+      && ($title{strlen($title) - 1} == '='))
+    { // DokuWiki
       $level = 7 - strspn($title, '=');
-    } else {                                   // Mediasyntax
+    } else 
+    {                                   // Mediasyntax
       $level = strspn($title, '=');
     }
     if ($level < 1) $level = 1;
@@ -63,7 +69,8 @@ class syntax_plugin_mediasyntax_header extends DokuWiki_Syntax_Plugin {
 
     if ($handler->status['section']) $handler->_addCall('section_close', array(), $pos);
 
-    if ($level <= $conf['maxseclevel']){
+    if ($level <= $conf['maxseclevel'])
+    {
         $handler->_addCall('section_edit', array(
           $handler->status['section_edit_start'],
           $pos-1,
@@ -82,7 +89,8 @@ class syntax_plugin_mediasyntax_header extends DokuWiki_Syntax_Plugin {
     return true;
   }
   
-  function render($mode, &$renderer, $data){
+  function render($mode, &$renderer, $data)
+  {
     return true;
   }
 }
