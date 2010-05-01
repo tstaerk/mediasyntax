@@ -16,8 +16,8 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin {
-
+class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin 
+{
   function getInfo()
   {
     return array(
@@ -55,7 +55,6 @@ class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin {
     }
     return false;
   }
-
 }
      
 //Setup VIM: ex: et ts=4 enc=utf-8 :
