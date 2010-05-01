@@ -16,9 +16,10 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin {
- 
-  function getInfo(){
+class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin 
+{
+  function getInfo()
+  {
     return array(
       'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
       'email'  => 'dev@staerk.de',
@@ -33,7 +34,8 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin {
   function getPType(){ return 'block'; }
   function getSort(){ return 101; }
   
-  function connectTo($mode){
+  function connectTo($mode)
+  {
     $this->Lexer->addEntryPattern(
       '\n(?= .*?)',
       $mode,
@@ -41,21 +43,25 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin {
     );
   }
   
-  function postConnect(){
+  function postConnect()
+  {
     $this->Lexer->addExitPattern(
       '\n(?=[^ ].*?)',
       'plugin_mediasyntax_codeblock'
     );
   }
   
-  function handle($match, $state, $pos, &$handler){
-    if ($state == DOKU_LEXER_UNMATCHED){
+  function handle($match, $state, $pos, &$handler)
+  {
+    if ($state == DOKU_LEXER_UNMATCHED)
+    {
       $handler->_addCall('preformatted', array($match), $pos);
     }
     return true;
   }
   
-  function render($mode, &$renderer, $data){
+  function render($mode, &$renderer, $data)
+  {
     return true;
   }
 }
