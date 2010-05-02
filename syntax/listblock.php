@@ -16,9 +16,10 @@ require_once(DOKU_PLUGIN.'syntax.php');
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
  */
-class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin {
- 
-  function getInfo(){
+class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin 
+{
+  function getInfo()
+  {
     return array(
       'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
       'email'  => 'dev@staerk.de',
@@ -29,15 +30,17 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin {
     );
   }
 
-  function getType(){ return 'container'; }
-  function getPType(){ return 'block'; }
-  function getSort(){ return 50; }
+  function getType() { return 'container'; }
+  function getPType() { return 'block'; }
+  function getSort() { return 50; }
   
-  function getAllowedTypes(){
+  function getAllowedTypes()
+  {
     return array('formatting', 'substition', 'disabled', 'protected');
   }
   
-  function connectTo($mode){
+  function connectTo($mode)
+  {
     $this->Lexer->addEntryPattern(
       '\n[ \t]*[\#\*](?!\*) *',
       $mode,
@@ -49,15 +52,18 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin {
     );
   }
   
-  function postConnect(){
+  function postConnect()
+  {
     $this->Lexer->addExitPattern(
       '\n',
       'plugin_mediasyntax_listblock'
     );
   }
   
-  function handle($match, $state, $pos, &$handler){
-    switch ($state){
+  function handle($match, $state, $pos, &$handler)
+  {
+    switch ($state)
+    {
       case DOKU_LEXER_ENTER:
         $ReWriter = & new Doku_Handler_List($handler->CallWriter);
         $ReWriter = & new Doku_Handler_Mediasyntax_List($handler->CallWriter);
@@ -80,21 +86,24 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin {
     return true;
   }
   
-  function render($mode, &$renderer, $data){
+  function render($mode, &$renderer, $data)
+  {
     return true;
   }
 }
 
 /* ----- Mediasyntax List Call Writer ----- */
 
-class Doku_Handler_Mediasyntax_List extends Doku_Handler_List {
-
-  function interpretSyntax($match, &$type){
+class Doku_Handler_Mediasyntax_List extends Doku_Handler_List 
+{
+  function interpretSyntax($match, &$type)
+  {
     $pos=strpos($match,"*");
     if ($pos===false) $type="o";
     else $type="u";
     $level = strlen(trim($match));  // Mediasyntax
-    if ($level <= 1){
+    if ($level <= 1)
+    {
       $c = count(explode('  ',str_replace("\t",'  ',$match)));
       if ($c > $level) $level = $c; // DokuWiki
     }
