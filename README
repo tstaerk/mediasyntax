@@ -24,3 +24,4 @@ Change history:
 2010-04-16: 1 hour:  testcase for external link
 2010-04-17: 2 hours: adapting goto plugin by Allen Ormond to become the redirect component
 2010-04-18: 3 hours: bold text works
+2010-05-05: 8 hours: preformatted text directly under normal text works, and two subsequent lines of preformatted text start on the same column

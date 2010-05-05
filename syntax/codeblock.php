@@ -37,7 +37,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   function connectTo($mode)
   {
     $this->Lexer->addEntryPattern(
-      '(?m)^[ \t]+',
+      '^ ',
       $mode,
       'plugin_mediasyntax_codeblock'
     );
@@ -53,6 +53,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   
   function handle($match, $state, $pos, &$handler)
   {
+    $match=" ".$match;
     if ($state == DOKU_LEXER_UNMATCHED)
     {
       $handler->_addCall('preformatted', array($match), $pos);

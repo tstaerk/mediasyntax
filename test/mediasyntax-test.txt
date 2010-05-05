@@ -26,4 +26,4 @@ line 2
 [http://www.staerk.de/thorsten this is an external link]
 
 normal text
-
+ preformatted text directly under normal text
