@@ -37,7 +37,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   function connectTo($mode)
   {
     $this->Lexer->addEntryPattern(
-      '\n(?= .*?)',
+      '(?m)^[ \t]+',
       $mode,
       'plugin_mediasyntax_codeblock'
     );
