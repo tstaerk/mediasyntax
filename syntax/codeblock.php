@@ -11,7 +11,7 @@ if(!defined('DOKU_INC')) die();
 
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 require_once(DOKU_PLUGIN.'syntax.php');
- 
+
 /**
  * All DokuWiki plugins to extend the parser/rendering mechanism
  * need to inherit from this class
@@ -34,19 +34,24 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   function getPType(){ return 'block'; }
   function getSort(){ return 101; }
   
-  function preConnect()
+  function connectTo($mode)
   {
-    $this->Lexer->addSpecialPattern(
-      '(?m)^[ ]+[^\n]*$',
+    $this->Lexer->addEntryPattern(
+      '^ ',
       'base',
       'plugin_mediasyntax_codeblock'
     );
+    global $buffer;
+    $buffer="test";
+    $handle = fopen ("/tmp/debug.txt", "a");
+    fwrite($handle,"mode is ".$mode);
+    fclose($handle);
   }
   
   function postConnect()
   {
     $this->Lexer->addExitPattern(
-      '\n(?=[^ ].*?)',
+      '\n[^ ]',
       'plugin_mediasyntax_codeblock'
     );
   }
@@ -54,7 +59,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   function handle($match, $state, $pos, &$handler)
   {
     $match=" ".$match;
-    //if ($state == DOKU_LEXER_UNMATCHED)
+    if ($state == DOKU_LEXER_UNMATCHED)
     {
       $handler->_addCall('preformatted', array($match), $pos);
     }
@@ -63,6 +68,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   
   function render($mode, &$renderer, $data)
   {
+    global $buffer;
     return true;
   }
 }
