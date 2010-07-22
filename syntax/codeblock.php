@@ -42,7 +42,6 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
       'plugin_mediasyntax_codeblock'
     );
     global $buffer;
-    $buffer="test";
     $handle = fopen ("/tmp/debug.txt", "a");
     fwrite($handle,"mode is ".$mode);
     fclose($handle);
@@ -68,7 +67,6 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   
   function render($mode, &$renderer, $data)
   {
-    global $buffer;
     return true;
   }
 }
