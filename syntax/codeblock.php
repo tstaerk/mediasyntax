@@ -50,7 +50,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   function postConnect()
   {
     $this->Lexer->addExitPattern(
-      '\n[^ ]',
+      '\n(?=[^ ].*?)',
       'plugin_mediasyntax_codeblock'
     );
   }
