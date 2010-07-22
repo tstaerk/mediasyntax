@@ -41,10 +41,6 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
       'base',
       'plugin_mediasyntax_codeblock'
     );
-    global $buffer;
-    $handle = fopen ("/tmp/debug.txt", "a");
-    fwrite($handle,"mode is ".$mode);
-    fclose($handle);
   }
   
   function postConnect()
