@@ -42,7 +42,7 @@ class syntax_plugin_mediasyntax_header extends DokuWiki_Syntax_Plugin
   function preConnect()
   {
     $this->Lexer->addSpecialPattern(
-      '(?m)^[ \t]*=+[^\n]+=*[ \t]*$',
+      '(?m)^[ \t]*=+[^\n]+=+[ \t]*$',
       'base',
       'plugin_mediasyntax_header'
     );
