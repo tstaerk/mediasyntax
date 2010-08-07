@@ -27,5 +27,5 @@ line 2
 
 [http://www.staerk.de/thorsten this is an external link]
 
-normal text
+normal text with a GB specialPattern in the line
  preformatted text directly under normal text

@@ -26,3 +26,4 @@ Change history:
 2010-04-18: 3 hours: bold text works
 2010-05-05: 8 hours: preformatted text directly under normal text works, and two subsequent lines of preformatted text start on the same column
 2010-07-22: 5 hours: preformatted text should work with SUSE and Ubuntu. Solution is simple: AddEntryPattern requires a parameter $mode. Set it to 'base'.
+2010-08-07: 8 hours: allowed a SpecialPattern (e.g. GB) in the mid of a line, directly followed by a blank, without triggering a preformatted area. Had to reasearch the calls object structure of the parser for this.

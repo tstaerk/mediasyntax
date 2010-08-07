@@ -32,13 +32,13 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
 
   function getType(){ return 'protected'; }
   function getPType(){ return 'block'; }
-  function getSort(){ return 101; }
+  function getSort(){ return 9; }
   
   function connectTo($mode)
   {
     $this->Lexer->addEntryPattern(
-      '^ ',
-      'base',
+      '\n(?= .*?)',
+      $mode,
       'plugin_mediasyntax_codeblock'
     );
   }
@@ -53,10 +53,9 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   
   function handle($match, $state, $pos, &$handler)
   {
-    $match=" ".$match;
     if ($state == DOKU_LEXER_UNMATCHED)
     {
-      $handler->_addCall('preformatted', array($match), $pos);
+       $handler->_addCall('preformatted', array($match), $pos);
     }
     return true;
   }
