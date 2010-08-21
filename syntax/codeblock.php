@@ -56,10 +56,9 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
     if ($state == DOKU_LEXER_UNMATCHED)
     {
        // $match2 = $match, but cut one blank at the beginning of every line.
-       for ($i=0;$i<strlen($match);$i++) 
+       for ($i=1;$i<strlen($match);$i++) 
        {
-         if ($i==0);
-         elseif ($match[$i-1] == "\n" && $match[$i] == " ") then ;
+         if ($match[$i-1] == "\n" && $match[$i] == " ") then ;
          else $match2.=$match[$i];
        }
        $handler->_addCall('preformatted', array($match2), $pos);
