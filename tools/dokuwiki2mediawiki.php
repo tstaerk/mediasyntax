@@ -66,9 +66,16 @@ if ($argc==2)
         // end of replace headings
 
         // replace bulletpoints
-        if (preg_match('/^  \*/',$line))
+        $level=0; // level of bulletpoints, e.g. * is level 1, *** is level 3.
+        while (preg_match('/^(  )+\*/',$line))
         {
-          $line=preg_replace("/^  \*/","*",$line);
+          $line=preg_replace("/^  /","",$line);
+          $level++;
+        }
+        while ($level>1)
+        {
+          $line="*".$line;
+          $level--;
         }
         // end of replace bulletpoints
 
