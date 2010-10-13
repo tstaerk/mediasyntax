@@ -65,6 +65,13 @@ if ($argc==2)
         }
         // end of replace headings
 
+        // replace bulletpoints
+        if (preg_match('/^  \*/',$line))
+        {
+          $line=preg_replace("/^  \*/","*",$line);
+        }
+        // end of replace bulletpoints
+
         fwrite($outputfile,$line);
       }
     }
