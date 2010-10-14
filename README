@@ -2,7 +2,7 @@
 
 All documentation for the Mediasyntax Plugin is available online at:
 
-  * http://www.staerk.de/thorsten/index.php/Mediasyntax
+  * http://www.staerk.de/thorsten/Mediasyntax
 
 ----
 
@@ -29,4 +29,4 @@ Change history:
 2010-08-07: 8 hours: allowed a SpecialPattern (e.g. GB) in the mid of a line, directly followed by a blank, without triggering a preformatted area. Had to reasearch the calls object structure of the parser for this.
 2010-08-20: 1 hour: preblock and codeblock should start on the same column
 2010-08-21: 1 hour: redirect made faster
-
+2010-10-13: 2 hours: convert tool to convert existing files from dokuwiki syntax to mediawiki syntax
