@@ -9,6 +9,7 @@
 // filename: not only one file name!
 // read: not only 4096 bytes
 // test if we overwrite a file
+// test if file exists
 
 if ($argc==1)
 {
@@ -18,15 +19,10 @@ if ($argc==1)
   echo "Usage: php dokuwiki2mediawiki <file>\n";
   echo "Example: php dokuwiki2mediawiki start.txt\n";
 }
-
-if ($argc > 2)
+else
+for ($argument=1;$argument<$argc;$argument++)
 {
-  echo "dokuwiki2mediawiki can only process one file at a time.\n";
-}
-
-if ($argc==2)
-{
-  $filename=$argv[1];
+  $filename=$argv[$argument];
   $inputfile=fopen($filename,"r");
   $outputfile=fopen($filename.".mod","w");
   if ($inputfile) 
@@ -85,5 +81,5 @@ if ($argc==2)
   }
   fclose ($inputfile);
   fclose ($outputfile);
-} // if ($argc==2)
+}
 ?>
