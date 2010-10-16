@@ -32,7 +32,11 @@ class syntax_plugin_mediasyntax_nonitalic extends DokuWiki_Syntax_Plugin
     );
   }
 
-  function getType() { return 'formatting'; }
+  function getType() 
+  {
+  // source: http://github.com/splitbrain/dokuwiki/blob/master/inc/parser/parser.php#L12
+    return 'formatting';
+  }
 
   function getSort()
   {
@@ -74,6 +78,13 @@ class syntax_plugin_mediasyntax_nonitalic extends DokuWiki_Syntax_Plugin
   
   function render($mode, &$renderer, $data)
   {
+    GLOBAL $done;
+    if($mode == 'xhtml')
+    {
+      if (!$done) $renderer->doc .= "//";
+      else $renderer->doc.="/";
+      $done=true;
+    }
     return true;
   }
 }
