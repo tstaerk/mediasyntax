@@ -29,3 +29,4 @@ line 2
 
 normal text with a GB specialPattern in the line
  preformatted text directly under normal text
+This '''is bold, but not //italic//, right?'''
