@@ -25,7 +25,7 @@ line 2
 
 =>this is not a heading!!!
 
-[http://www.staerk.de/thorsten this is an external link]
+[http://www.staerk.de/thorsten this is an external link] this is right from the link
 
 normal text with a GB specialPattern in the line
  preformatted text directly under normal text

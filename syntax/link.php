@@ -31,7 +31,7 @@ class syntax_plugin_mediasyntax_link extends DokuWiki_Syntax_Plugin
   }
 
   function getType(){ return 'protected'; }
-  function getPType(){ return 'block'; }
+
   function getSort(){ return 101; }
   
   function connectTo($mode)
