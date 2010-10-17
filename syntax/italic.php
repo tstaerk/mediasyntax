@@ -45,11 +45,7 @@ class syntax_plugin_mediasyntax_italic extends DokuWiki_Syntax_Plugin
     $handler->_nestingTag($match, $state, $pos, 'emphasis');
     return true;
   }
-  
-  function render($mode, &$renderer, $data)
-  {
-    return true;
-  }
+
 }
      
 //Setup VIM: ex: et ts=4 enc=utf-8 :
