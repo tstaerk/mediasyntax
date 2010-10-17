@@ -1,9 +1,9 @@
 <?php
 /**
- * Mediasyntax Plugin, preformatted block component: Mediawiki style preformatted text
+ * Mediasyntax Plugin, preformatted block component: Mediawiki style italic text
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
- * @author     Esther Brunner <wikidesign@gmail.com>
+ * @author     Thorsten Staerk
  */
  
 // must be run within Dokuwiki
