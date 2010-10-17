@@ -18,17 +18,6 @@ require_once(DOKU_PLUGIN.'syntax.php');
  */
 class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin 
 {
-  function getInfo()
-  {
-    return array(
-      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
-      'email'  => 'dev@staerk.de',
-      'date'   => '2010-03-29',
-      'name'   => 'Mediasyntax Plugin, listblock component',
-      'desc'   => 'Mediawiki style ordered and unorderered lists',
-      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
-    );
-  }
 
   function getType() { return 'container'; }
   function getPType() { return 'block'; }

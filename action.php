@@ -10,21 +10,8 @@ if(!defined('DOKU_INC')) die();
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 require_once(DOKU_PLUGIN.'action.php');
 
-class action_plugin_mediasyntax extends DokuWiki_Action_Plugin {
-
-  /**
-   * return some info
-   */
-  function getInfo(){
-    return array(
-      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
-      'email'  => 'dev@staerk.de',
-      'date'   => '2010-03-29',
-      'name'   => 'Mediasyntax Plugin',
-      'desc'   => 'Changes the editor toolbar if markup precedence is set to Mediasyntax',
-      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
-    );
-  }
+class action_plugin_mediasyntax extends DokuWiki_Action_Plugin 
+{
 
   /**
    * register the eventhandlers

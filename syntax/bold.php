@@ -18,17 +18,6 @@ require_once(DOKU_PLUGIN.'syntax.php');
  */
 class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin 
 {
-  function getInfo()
-  {
-    return array(
-      'author' => 'Thorsten Stärk',
-      'email'  => 'dev@staerk.de',
-      'date'   => '2010-04-18',
-      'name'   => 'Mediasyntax Plugin, bold component',
-      'desc'   => 'Mediasyntax style bold text',
-      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
-    );
-  }
 
   function getType() { return 'substition'; }
   function getSort() { return 32; }

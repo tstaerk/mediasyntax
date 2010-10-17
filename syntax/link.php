@@ -18,17 +18,6 @@ require_once(DOKU_PLUGIN.'syntax.php');
  */
 class syntax_plugin_mediasyntax_link extends DokuWiki_Syntax_Plugin 
 {
-  function getInfo()
-  {
-    return array(
-      'author' => 'Thorsten Stärk',
-      'email'  => 'dev@staerk.de',
-      'date'   => '2010-04-15',
-      'name'   => 'Mediasyntax Plugin, link component',
-      'desc'   => 'Mediasyntax style links',
-      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
-    );
-  }
 
   function getType(){ return 'protected'; }
 

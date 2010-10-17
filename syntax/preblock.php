@@ -18,18 +18,6 @@ require_once(DOKU_PLUGIN.'syntax.php');
  */
 class syntax_plugin_mediasyntax_preblock extends DokuWiki_Syntax_Plugin 
 {
- 
-  function getInfo()
-  {
-    return array(
-      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
-      'email'  => 'dev@staerk.de',
-      'date'   => '2010-03-29',
-      'name'   => 'Mediasyntax Plugin, preformatted block component',
-      'desc'   => 'Mediasyntax style preformatted text',
-      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
-    );
-  }
 
   function getType(){ return 'protected'; }
   function getPType(){ return 'block'; }

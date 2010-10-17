@@ -20,17 +20,6 @@ require_once(DOKU_PLUGIN.'syntax.php');
 */
 class syntax_plugin_mediasyntax_nonitalic extends DokuWiki_Syntax_Plugin
 {
-  function getInfo()
-  {
-    return array(
-      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
-      'email' => 'dev@staerk.de',
-      'date' => '2010-10-16',
-      'name' => 'Mediasyntax Plugin, non italic component',
-      'desc' => 'Mediawiki style handling of // string',
-      'url' => 'http://wiki.splitbrain.org/plugin:mediasyntax',
-    );
-  }
 
   function getType() 
   {

@@ -18,17 +18,6 @@ require_once(DOKU_PLUGIN.'syntax.php');
  */
 class syntax_plugin_mediasyntax_header extends DokuWiki_Syntax_Plugin 
 {
-  function getInfo()
-  {
-    return array(
-      'author' => 'Thorsten Stärk, Gina Häußge, Michael Klier, Esther Brunner',
-      'email'  => 'dev@staerk.de',
-      'date'   => '2010-03-29',
-      'name'   => 'Mediasyntax Plugin, header component',
-      'desc'   => 'Mediawiki style headers',
-      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
-    );
-  }
 
   function getType(){ return 'container'; }
   function getPType(){ return 'block'; }

@@ -19,17 +19,6 @@ require_once(DOKU_PLUGIN.'syntax.php');
  */
 class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin 
 {
-  function getInfo()
-  {
-    return array(
-      'author' => 'Thorsten Stärk',
-      'email'  => 'dev@staerk.de',
-      'date'   => '2010-04-17',
-      'name'   => 'Mediasyntax Plugin, redirect component',
-      'desc'   => 'Mediasyntax style redirects',
-      'url'    => 'http://wiki.splitbrain.org/plugin:mediasyntax',
-    );
-  }
 
   function getType(){ return 'protected'; }
   function getPType(){ return 'block'; }
