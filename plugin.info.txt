@@ -1,8 +1,4 @@
-{
-  "name" : "mediasyntax",
-  "version" : "dev",
-  "author" : "Thorsten Staerk <dev@staerk.de>",
-  "repository" : {"type": "git", "url": "git://github.com/tstaerk/mediasyntax.git"},
-  "dependencies" : {},
-  "description" : "Mediawiki syntax for Dokuwiki (comes with a converter)"
-}
+base  mediasyntax
+name  mediasyntax
+author  Thorsten Staerk
+description  Mediawiki syntax for Dokuwiki (comes with a converter)
