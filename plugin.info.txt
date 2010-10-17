@@ -1,4 +1,7 @@
 base  mediasyntax
 name  mediasyntax
-author  Thorsten Staerk
-description  Mediawiki syntax for Dokuwiki (comes with a converter)
+author Thorsten Staerk
+email  dev@staerk.de
+date   2010-10-17
+desc   Mediawiki syntax for Dokuwiki (comes with a converter)
+url    http://www.staerk.de/thorsten/mediasyntax
