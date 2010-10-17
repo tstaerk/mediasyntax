@@ -31,3 +31,4 @@ Change history:
 2010-08-21: 1 hour: redirect made faster
 2010-10-13: 2 hours: convert tool to convert existing files from dokuwiki syntax to mediawiki syntax
 2010-10-16: 3 hours: un-teach dokuwiki that // makes text italic
+2010-10-17: 1 hour: italic font and plugin info text
