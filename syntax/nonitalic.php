@@ -58,6 +58,7 @@ class syntax_plugin_mediasyntax_nonitalic extends DokuWiki_Syntax_Plugin
   
   function handle($match, $state, $pos, &$handler)
   {
+    $match="//".$match."//";
     if ($state == DOKU_LEXER_UNMATCHED)
     {
       $handler->_addCall('unformatted', array($match), $pos);
@@ -67,13 +68,6 @@ class syntax_plugin_mediasyntax_nonitalic extends DokuWiki_Syntax_Plugin
   
   function render($mode, &$renderer, $data)
   {
-    GLOBAL $done;
-    if($mode == 'xhtml')
-    {
-      if (!$done) $renderer->doc .= "//";
-      else $renderer->doc.="/";
-      $done=true;
-    }
     return true;
   }
 }
