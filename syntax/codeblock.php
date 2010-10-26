@@ -20,7 +20,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
 {
 
   function getType(){ return 'protected'; }
-  function getPType(){ return 'block'; }
+
   function getSort(){ return 9; }
   
   function connectTo($mode)
@@ -30,12 +30,16 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
       $mode,
       'plugin_mediasyntax_codeblock'
     );
-  }
+      $this->Lexer->addPattern(
+      '\n +',
+      'plugin_mediasyntax_listblock'
+    );
+}
   
   function postConnect()
   {
     $this->Lexer->addExitPattern(
-      '\n(?=[^ ].*?)',
+      '(?=\n[^ ].*?)',
       'plugin_mediasyntax_codeblock'
     );
   }

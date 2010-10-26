@@ -35,3 +35,5 @@ Change history:
 2010-10-16: 3 hours: un-teach dokuwiki that // makes text italic
 2010-10-17: 2 hour: italic font and plugin info text, removing getInfo()
 2010-10-19: 1 hour: cleanup code, remove misleading configuration setting
+2010-10-26: 1 hour: allow a listitem directly under a codeblock
+
