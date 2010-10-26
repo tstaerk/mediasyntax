@@ -19,22 +19,17 @@ require_once(DOKU_PLUGIN.'syntax.php');
 class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin 
 {
 
-  function getType(){ return 'protected'; }
+  function getType() { return 'protected'; }
 
-  function getSort(){ return 9; }
+  function getSort() { return 9; }
   
   function connectTo($mode)
   {
     $this->Lexer->addEntryPattern(
       '\n(?= .*?)',
       $mode,
-      'plugin_mediasyntax_codeblock'
-    );
-      $this->Lexer->addPattern(
-      '\n +',
-      'plugin_mediasyntax_listblock'
-    );
-}
+      'plugin_mediasyntax_codeblock');
+  }
   
   function postConnect()
   {
