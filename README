@@ -36,4 +36,5 @@ Change history:
 2010-10-17: 2 hour: italic font and plugin info text, removing getInfo()
 2010-10-19: 1 hour: cleanup code, remove misleading configuration setting
 2010-10-26: 1 hour: allow a listitem directly under a codeblock
+2010-10-28: 1 hour: allow a codeblock directly under a listitem
 
