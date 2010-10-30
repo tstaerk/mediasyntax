@@ -29,31 +29,20 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
    *
    * @author  Esther Brunner  <wikidesign@gmail.com>
    */
-  function define_toolbar(&$event, $param){
-    // return false;  
-    if ($this->getConf('precedence') != 'mediasyntax') return false; // leave untouched
-        
+  function define_toolbar(&$event, $param)
+  {      
     $c = count($event->data);
-    for ($i = 0; $i <= $c; $i++){
-      if ($event->data[$i]['type'] == 'format'){
-        
-        // headers
-        if (preg_match("/h(\d)\.png/", $event->data[$i]['icon'], $match)){
-          $markup = substr('======', 0, $match[1]);
-          $event->data[$i]['open']  = $markup." ";
-          $event->data[$i]['close'] = " ".$markup."\\n";
-          
-        // ordered lists
-        } elseif ($event->data[$i]['icon'] == 'ol.png'){
-          $event->data[$i]['open']  = "# ";
-          
-        // unordered lists
-        } elseif ($event->data[$i]['icon'] == 'ul.png'){
-          $event->data[$i]['open']  = "* ";
-        }
+    for ($i = 0; $i <= $c; $i++)
+    {    
+      if ($event->data[$i]['icon'] == 'ol.png')
+      {
+        $event->data[$i]['open']  = "# ";
+      } 
+      elseif ($event->data[$i]['icon'] == 'ul.png')
+      {
+        $event->data[$i]['open']  = "* ";
       }
     }
-    
     return true;
   }
   
