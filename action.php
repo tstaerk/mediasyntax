@@ -1,7 +1,7 @@
 <?php
 /**
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
- * @author     Esther Brunner <wikidesign@gmail.com>
+ * @author     Thorsten Staerk <dokuwiki@staerk.de>, Esther Brunner <wikidesign@gmail.com>
  */
 
 // must be run within Dokuwiki
@@ -16,7 +16,8 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
   /**
    * register the eventhandlers
    */
-  function register(&$contr){
+  function register(&$contr)
+  {
     $contr->register_hook('TOOLBAR_DEFINE',
                           'AFTER',
                           $this,
@@ -50,7 +51,6 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     }
     return true;
   }
-  
 }
 
 //Setup VIM: ex: et ts=4 enc=utf-8 :
