@@ -42,6 +42,11 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
       {
         $event->data[$i]['open']  = "* ";
       }
+      elseif ($event->data[$i]['icon'] == 'italic.png')
+      {
+        $event->data[$i]['open']  = "''";
+        $event->data[$i]['close']  = "''";
+      }
     }
     return true;
   }
