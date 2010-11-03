@@ -53,13 +53,13 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         $event->data[$i]['open']  = "''";
         $event->data[$i]['close']  = "''";
       }
-       elseif ($event->data[$i]['icon'] == 'bold.png')
+      elseif ($event->data[$i]['icon'] == 'bold.png')
       {
         $event->data[$i]['open']  = "'''";
         $event->data[$i]['close']  = "'''";
       }
    }
-    return true;
+   return true;
   }
 }
 
