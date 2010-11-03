@@ -46,6 +46,11 @@ class syntax_plugin_mediasyntax_italic extends DokuWiki_Syntax_Plugin
     return true;
   }
 
+  function render($mode, &$renderer, $data)
+  // do not flood apache's log with PHP Warning:  render() not implemented
+  {
+    return true;
+  }
 }
      
 //Setup VIM: ex: et ts=4 enc=utf-8 :
