@@ -39,10 +39,14 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
       {
         $event->data[$i]['open']  = "# ";
       } 
-      elseif ($event->data[$i]['icon'] == 'h1.png')
+      elseif ($event->data[$i]['icon'] == 'h.png')
       {
-        $event->data[$i]['open']  = "= ";
-        $event->data[$i]['close']  = " =";
+        $entry=$event->data[$i]['list'][0];
+        if ($entry['icon'] == "h1.png")
+        {
+          $entry['open'] = "= ";
+          $entry['close']  = " =";
+        }
       }
       elseif ($event->data[$i]['icon'] == 'ul.png')
       {
