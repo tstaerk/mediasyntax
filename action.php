@@ -44,7 +44,7 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         $event->data[$i]['list'][0]['open'] = "= ";
         $event->data[$i]['list'][0]['close']  = " =\\n";
         $event->data[$i]['list'][1]['open'] = "== ";
-        $event->data[$i]['list'][1]['close']  == " =\\n";
+        $event->data[$i]['list'][1]['close']  = " ==\\n";
       }
       elseif ($event->data[$i]['icon'] == 'ul.png')
       {
