@@ -41,12 +41,8 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
       } 
       elseif ($event->data[$i]['icon'] == 'h.png')
       {
-        $entry=$event->data[$i]['list'][0];
-        if ($entry['icon'] == "h1.png")
-        {
-          $entry['open'] = "= ";
-          $entry['close']  = " =";
-        }
+        $event->data[$i]['list'][0]['open'] = "= ";
+        $event->data[$i]['list'][0]['close']  = " =\\n";
       }
       elseif ($event->data[$i]['icon'] == 'ul.png')
       {
