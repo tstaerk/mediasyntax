@@ -82,6 +82,7 @@ for ($argument=1;$argument<$argc;$argument++)
           $line=preg_replace("/^  /","",$line);
           $level++;
         }
+        $line=preg_replace("/^-/","#",$line);
         while ($level>1)
         {
           $line="#".$line;
