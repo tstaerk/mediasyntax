@@ -75,6 +75,20 @@ for ($argument=1;$argument<$argc;$argument++)
         }
         // end of replace bulletpoints
 
+        // replace ordered list items
+        $level=0; // level of list items, e.g. - is level 1, --- is level 3.
+        while (preg_match('/^(  )+\-/',$line))
+        {
+          $line=preg_replace("/^  /","",$line);
+          $level++;
+        }
+        while ($level>1)
+        {
+          $line="#".$line;
+          $level--;
+        }
+        // end of replace ordered list items
+
         fwrite($outputfile,$line);
       }
     }
