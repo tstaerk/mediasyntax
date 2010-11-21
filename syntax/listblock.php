@@ -91,11 +91,6 @@ class Doku_Handler_Mediasyntax_List extends Doku_Handler_List
     if ($pos===false) $type="o";
     else $type="u";
     $level = strlen(trim($match));  // Mediasyntax
-    if ($level <= 1)
-    {
-      $c = count(explode('  ',str_replace("\t",'  ',$match)));
-      if ($c > $level) $level = $c; // DokuWiki
-    }
     return $level;
   }
 }
