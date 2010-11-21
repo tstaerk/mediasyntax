@@ -30,11 +30,13 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin
   
   function connectTo($mode)
   {
+    // a list block starts with a new line starting with one or more * or # signs
     $this->Lexer->addEntryPattern(
-      '\n[ \t]*[\#\*](?!\*) *',
+      '\n[ \t]*[\#\*]+ *',
       $mode,
       'plugin_mediasyntax_listblock'
     );
+    // a list block continues as long as the following lines start with one or more * or # signs
     $this->Lexer->addPattern(
       '\n[ \t]*[\#\*\-]+ *',
       'plugin_mediasyntax_listblock'
