@@ -229,43 +229,55 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
                     $i--;
                 }
 
-                if($mode == 'page' || $mode == 'section') {
+                if($mode == 'page' || $mode == 'section') 
+                {
                     $page = cleanID($this->_apply_macro($ins[$i][1][1][1]));
                     $perm = auth_quickaclcheck($page);
 
                     array_push($this->hasparts, $page);
-                    if($perm < AUTH_READ) continue;
+                    
+                    if($perm >= AUTH_READ)
+                    {
 
-                    $sect  = $ins[$i][1][1][2];
-                    $flags = $ins[$i][1][1][3];
+                      $sect  = $ins[$i][1][1][2];
+                      $flags = $ins[$i][1][1][3];
 
-                    resolve_pageid(getNS($scope), $page, $exists); // resolve shortcuts
-                    $ins[$i][1][1][4] = $scope;
-                    $scope = $page;
-                    $flags = $this->get_flags($flags);
+                      resolve_pageid(getNS($scope), $page, $exists); // resolve shortcuts
+                      $ins[$i][1][1][4] = $scope;
+                      $scope = $page;
+                      $flags = $this->get_flags($flags);
 
-                    if(!page_exists($page)) {
-                        if($flags['footer']) {
-                            $ins[$i] = $this->_footer($page, $sect, '', $flags, 0);
-                        } else {
-                            unset($ins[$i]);
-                        }
-                    } else {
-                        $ins_inc = $this->_get_instructions($page, $sect, $mode, $lvl, $flags);
-                        if(!empty($ins_inc)) {
-                            // combine instructions and reset counter
-                            $ins_start = array_slice($ins, 0, $i+1);
-                            $ins_end   = array_slice($ins, $i+1);
-                            $range = $i + count($ins_inc);
-                            $ins = array_merge($ins_start, $ins_inc, $ins_end);
-                            $num = count($ins);
-                        }
-                    }
+                      if(!page_exists($page)) 
+                      {
+                          if($flags['footer']) 
+                          {
+                              $ins[$i] = $this->_footer($page, $sect, '', $flags, 0);
+                          } 
+                          else 
+                          {
+                              unset($ins[$i]);
+                          }
+                      } 
+                      else 
+                      {
+                          $ins_inc = $this->_get_instructions($page, $sect, $mode, $lvl, $flags);
+                          if(!empty($ins_inc)) 
+                          {
+                              // combine instructions and reset counter
+                              $ins_start = array_slice($ins, 0, $i+1);
+                              $ins_end   = array_slice($ins, $i+1);
+                              $range = $i + count($ins_inc);
+                              $ins = array_merge($ins_start, $ins_inc, $ins_end);
+                              $num = count($ins);
+                          }
+                      }
+                   }
                 }
             }
 
             // check if we left the range of possible sub includes and reset lvl and scope to toplevel_id
-            if($range && ($i >= $range)) {
+            if($range && ($i >= $range)) 
+            {
                 $lvl = ($prev_lvl == 0) ? 0 : $prev_lvl;
                 $range    = false;
                 // reset scope to toplevel_id
