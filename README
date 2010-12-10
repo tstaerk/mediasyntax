@@ -16,26 +16,27 @@ Do NOT try to install this plugin via un-tarring it. Use plugin manager as descr
 See COPYING for license info.
 
 Change history:
-2010-03-29: 2 hours: created mediasyntax from creole plugin
-2010-04-02: 4 hours: single blank at beginning of line makes preformatted text
-2010-04-03: 1 hour:  testcase & two adjacent preformatted lines fix
-2010-04-08: 1 hour:  version updated
-2010-04-10: 3 hours: possibility to use the <pre> tag
-2010-04-11: 1 hour:  <pre> tag must not be interrupted by a line starting with a character that is not a space
-2010-04-15: 3 hours: external links work
-2010-04-16: 1 hour:  testcase for external link
-2010-04-17: 2 hours: adapting goto plugin by Allen Ormond to become the redirect component
-2010-04-18: 3 hours: bold text works
-2010-05-05: 8 hours: preformatted text directly under normal text works, and two subsequent lines of preformatted text start on the same column
-2010-07-22: 5 hours: preformatted text should work with SUSE and Ubuntu. Solution is simple: AddEntryPattern requires a parameter $mode. Set it to 'base'.
-2010-08-07: 8 hours: allowed a SpecialPattern (e.g. GB) in the mid of a line, directly followed by a blank, without triggering a preformatted area. Had to reasearch the calls object structure of the parser for this.
-2010-08-20: 1 hour: preblock and codeblock should start on the same column
-2010-08-21: 1 hour: redirect made faster
-2010-10-13: 2 hours: convert tool to convert existing files from dokuwiki syntax to mediawiki syntax
-2010-10-16: 3 hours: un-teach dokuwiki that // makes text italic
-2010-10-17: 2 hour: italic font and plugin info text, removing getInfo()
-2010-10-19: 1 hour: cleanup code, remove misleading configuration setting
-2010-10-26: 1 hour: allow a listitem directly under a codeblock
-2010-10-28: 1 hour: allow a codeblock directly under a listitem
-2010-10-30: 2 hours: made toolbar work
+2010-12-10: 2 hours: allowed {{included pages}} as in mediawiki style
 2010-11-21: 1 hour: listblock starting with two ** works now, see https://github.com/tstaerk/mediasyntax/issues#issue/1
+2010-10-30: 2 hours: made toolbar work
+2010-10-28: 1 hour: allow a codeblock directly under a listitem
+2010-10-26: 1 hour: allow a listitem directly under a codeblock
+2010-10-19: 1 hour: cleanup code, remove misleading configuration setting
+2010-10-17: 2 hour: italic font and plugin info text, removing getInfo()
+2010-10-16: 3 hours: un-teach dokuwiki that // makes text italic
+2010-10-13: 2 hours: convert tool to convert existing files from dokuwiki syntax to mediawiki syntax
+2010-08-21: 1 hour: redirect made faster
+2010-08-20: 1 hour: preblock and codeblock should start on the same column
+2010-08-07: 8 hours: allowed a SpecialPattern (e.g. GB) in the mid of a line, directly followed by a blank, without triggering a preformatted area. Had to reasearch the calls object structure of the parser for this.
+2010-07-22: 5 hours: preformatted text should work with SUSE and Ubuntu. Solution is simple: AddEntryPattern requires a parameter $mode. Set it to 'base'.
+2010-05-05: 8 hours: preformatted text directly under normal text works, and two subsequent lines of preformatted text start on the same column
+2010-04-18: 3 hours: bold text works
+2010-04-17: 2 hours: adapting goto plugin by Allen Ormond to become the redirect component
+2010-04-16: 1 hour:  testcase for external link
+2010-04-15: 3 hours: external links work
+2010-04-11: 1 hour:  <pre> tag must not be interrupted by a line starting with a character that is not a space
+2010-04-10: 3 hours: possibility to use the <pre> tag
+2010-04-08: 1 hour:  version updated
+2010-04-03: 1 hour:  testcase & two adjacent preformatted lines fix
+2010-04-02: 4 hours: single blank at beginning of line makes preformatted text
+2010-03-29: 2 hours: created mediasyntax from creole plugin
