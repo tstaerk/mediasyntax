@@ -58,19 +58,25 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
      *
      * @author Michael Klier <chi@chimeric.de>
      */
-    function handle_parser(&$event, $param) {
+    function handle_parser(&$event, $param) 
+    {
         global $ID;
 
         // check for stored toplevel ID in helper plugin
         // if it's missing lets see if we have to do anything at all
-        if(!isset($this->helper->toplevel_id)) {
+        if(!isset($this->helper->toplevel_id)) 
+        {
             $ins =& $event->data->calls;
             $num = count($ins);
-            for($i=0; $i<$num; $i++) {
-                if(($ins[$i][0] == 'plugin')) {
-                    switch($ins[$i][1][0]) {
+            for($i=0; $i<$num; $i++)  
+            {
+                if(($ins[$i][0] == 'plugin')) 
+                {
+                    switch($ins[$i][1][0]) 
+                    {
                         case 'mediasyntax_include':
-                            if(!isset($this->helper->toplevel_id)) {
+                            if(!isset($this->helper->toplevel_id)) 
+                            {
                                 $this->helper->toplevel_id = $ID;
                             }
                             $this->helper->parse_instructions($ID, $ins);
@@ -89,8 +95,10 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     /**
      * Add a hidden input to the form to preserve the redirect_id
      */
-    function handle_form(&$event, $param) {
-      if (array_key_exists('redirect_id', $_REQUEST)) {
+    function handle_form(&$event, $param) 
+    {
+      if (array_key_exists('redirect_id', $_REQUEST)) 
+      {
         $event->data->addHidden('redirect_id', cleanID($_REQUEST['redirect_id']));
       }
     }
@@ -98,8 +106,10 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     /**
      * Modify the data for the redirect when there is a redirect_id set
      */
-    function handle_redirect(&$event, $param) {
-      if (array_key_exists('redirect_id', $_REQUEST)) {
+    function handle_redirect(&$event, $param) 
+    {
+      if (array_key_exists('redirect_id', $_REQUEST)) 
+      {
         $event->data['id'] = cleanID($_REQUEST['redirect_id']);
         $event->data['title'] = '';
       }
@@ -113,9 +123,6 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         global $ID;
         global $INFO;
         global $conf;
-$handler=fopen("/tmp/debug","a");
-fwrite ($handler, "entering cache prepare \n");
-fclose ($handler);
 
         $cache =& $event->data;
 

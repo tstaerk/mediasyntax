@@ -36,14 +36,8 @@ class syntax_plugin_mediasyntax_include extends DokuWiki_Syntax_Plugin
 
         $match = substr($match, 2, -2); // strip markup
         list($match, $flags) = explode('&', $match, 2);
-$handler=fopen("/tmp/debug","a");
-fwrite ($handler,"match=".$match);
-fclose ($handler);
         // break the pattern up into its parts 
         list($page, $sect) = preg_split('/#/u', $match, 2); 
-$handler=fopen("/tmp/debug","a");
-fwrite ($handler,"page=".$page);
-fclose ($handler);
         $mode="page";
         return array($mode, $page, cleanID($sect), explode('&', $flags)); 
     }
