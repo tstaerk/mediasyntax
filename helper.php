@@ -233,6 +233,10 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
                 {
                     $page = cleanID($this->_apply_macro($ins[$i][1][1][1]));
                     $perm = auth_quickaclcheck($page);
+$handler=fopen("/tmp/debug","a");
+fwrite ($handler, "mode is $mode, page is $page, perm is $perm");
+fwrite ($handler, "quickaclcheck(1) is ".auth_quickaclcheck(1));
+fclose ($handler);
 
                     array_push($this->hasparts, $page);
                     

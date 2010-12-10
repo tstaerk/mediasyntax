@@ -16,7 +16,8 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     var $supportedModes = array('xhtml', 'i');
     var $helper = null;
 
-    function action_plugin_mediasyntax() {
+    function action_plugin_mediasyntax() 
+    {
         $this->helper = plugin_load('helper', 'mediasyntax');
     }
 
@@ -41,13 +42,15 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     /**
      * Used for debugging purposes only
      */
-    function handle_metadata(&$event, $param) {
-        global $conf;
-        if($conf['allowdebug']) {
-            dbglog('---- PLUGIN INCLUDE META DATA START ----');
-            dbglog($event->data);
-            dbglog('---- PLUGIN INCLUDE META DATA END ----');
-        }
+    function handle_metadata(&$event, $param) 
+    {
+      global $conf;
+      if($conf['allowdebug']) 
+      {
+          dbglog('---- PLUGIN INCLUDE META DATA START ----');
+          dbglog($event->data);
+          dbglog('---- PLUGIN INCLUDE META DATA END ----');
+      }
     }
 
     /**
@@ -105,10 +108,14 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     /**
      * prepare the cache object for default _useCache action
      */
-    function _cache_prepare(&$event, $param) {
+    function _cache_prepare(&$event, $param) 
+    {
         global $ID;
         global $INFO;
         global $conf;
+$handler=fopen("/tmp/debug","a");
+fwrite ($handler, "entering cache prepare \n");
+fclose ($handler);
 
         $cache =& $event->data;
 
@@ -117,15 +124,19 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         if(!isset($cache->page) || ($cache->page != $ID)) return;
         if(!isset($cache->mode) || !in_array($cache->mode, $this->supportedModes)) return;
 
-        if(!empty($INFO['userinfo'])) {
+        if(!empty($INFO['userinfo'])) 
+        {
             $include_key = $INFO['userinfo']['name'] . '|' . implode('|', $INFO['userinfo']['grps']);
-        } else {
+        } 
+        else 
+        {
             $include_key = '@ALL';
         }
 
         $depends = p_get_metadata($ID, 'plugin_mediasyntax');
         
-        if($conf['allowdebug']) {
+        if($conf['allowdebug']) 
+        {
             dbglog('---- PLUGIN INCLUDE INCLUDE KEY START ----');
             dbglog($include_key);
             dbglog('---- PLUGIN INCLUDE INCLUDE KEY END ----');
@@ -133,28 +144,50 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
             dbglog($depends);
             dbglog('---- PLUGIN INCLUDE CACHE DEPENDS END ----');
         }
-
-        if(is_array($depends)) {
+$handler=fopen("/tmp/debug","a");
+fwrite ($handler, "still here \n");
+fclose ($handler);
+$handler=fopen("/tmp/debug","a");
+fwrite ($handler,"pages=".var_export($pages,true));
+fwrite ($handler,"depends=".var_export($depends, true));
+fwrite ($handler,"param=".var_export($param, true));
+//fwrite ($handler,"event=".var_export($event, true));
+fwrite ($handler,"cache=".var_export($cache, true));
+fclose ($handler);
+$cache->depends['purge'] = true;
+        if(is_array($depends)) 
+        {
             $pages = array();
-            if(!isset($depends['keys'][$include_key])) {
+            if(!isset($depends['keys'][$include_key])) 
+            {
                 $cache->depends['purge'] = true; // include key not set - request purge 
-            } else {
+            }
+            else 
+            {
                 $pages = $depends['pages'];
             }
-        } else {
+        } 
+        else 
+        {
             // nothing to do for us
             return;
         }
 
         // add plugin.info.txt to depends for nicer upgrades
         $cache->depends['files'][] = dirname(__FILE__) . '/plugin.info.txt';
+$handler=fopen("/tmp/debug","a");
+fwrite ($handler,"pages=".var_export($pages,true));
+fwrite ($handler,"depends=".var_export($depends, true));
+fclose ($handler);
 
         $key = ''; 
-        foreach($pages as $page) {
+        foreach($pages as $page) 
+        {
             $page = cleanID($this->helper->_apply_macro($page));
             resolve_pageid(getNS($ID), $page, $exists);
             $file = wikiFN($page);
-            if(!in_array($cache->depends['files'], array($file)) && @file_exists($file)) {
+            if(!in_array($cache->depends['files'], array($file)) && @file_exists($file)) 
+            {
                 $cache->depends['files'][] = $file;
                 $key .= '#' . $page . '|ACL' . auth_quickaclcheck($page);
             }
