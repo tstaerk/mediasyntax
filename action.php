@@ -144,17 +144,8 @@ fclose ($handler);
             dbglog($depends);
             dbglog('---- PLUGIN INCLUDE CACHE DEPENDS END ----');
         }
-$handler=fopen("/tmp/debug","a");
-fwrite ($handler, "still here \n");
-fclose ($handler);
-$handler=fopen("/tmp/debug","a");
-fwrite ($handler,"pages=".var_export($pages,true));
-fwrite ($handler,"depends=".var_export($depends, true));
-fwrite ($handler,"param=".var_export($param, true));
-//fwrite ($handler,"event=".var_export($event, true));
-fwrite ($handler,"cache=".var_export($cache, true));
-fclose ($handler);
-$cache->depends['purge'] = true;
+
+        $cache->depends['purge'] = true; // kill some performance
         if(is_array($depends)) 
         {
             $pages = array();
@@ -175,10 +166,6 @@ $cache->depends['purge'] = true;
 
         // add plugin.info.txt to depends for nicer upgrades
         $cache->depends['files'][] = dirname(__FILE__) . '/plugin.info.txt';
-$handler=fopen("/tmp/debug","a");
-fwrite ($handler,"pages=".var_export($pages,true));
-fwrite ($handler,"depends=".var_export($depends, true));
-fclose ($handler);
 
         $key = ''; 
         foreach($pages as $page) 
