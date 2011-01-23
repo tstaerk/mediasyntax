@@ -33,3 +33,5 @@ normal text with a GB specialPattern in the line
 This '''is bold, but not //italic//, right?'''
 
 ''this line is italic''
+
+''This is an italic [[link]]''. '''This is a bold [[link]]'''.
