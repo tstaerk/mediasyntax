@@ -25,31 +25,25 @@ class syntax_plugin_mediasyntax_italic extends DokuWiki_Syntax_Plugin
   
   function connectTo($mode)
   {
-    $this->Lexer->addEntryPattern(
-      '\'\'(?=.*\'\')',
-      $mode,
-      'plugin_mediasyntax_italic'
-    );
-  }
-  
-  function postConnect()
-  {
-    $this->Lexer->addExitPattern(
-      '\'\'',
-      'plugin_mediasyntax_italic'
-    );
+    $this->Lexer->addSpecialPattern('\'\'',$mode,'plugin_mediasyntax_italic');
   }
   
   function handle($match, $state, $pos, &$handler)
   {
-    $handler->_nestingTag($match, $state, $pos, 'emphasis');
-    return true;
+    return array($match, $state, $pos);
   }
 
   function render($mode, &$renderer, $data)
-  // do not flood apache's log with PHP Warning:  render() not implemented
   {
-    return true;
+    GLOBAL $italic;
+    if($mode == 'xhtml')
+    {
+      if (!$italic) $renderer->doc .= "<i>";
+      else $renderer->doc .= "</i>";
+      if ($italic) $italic=false;
+      else $italic=true;
+    }
+    return false;
   }
 }
      
