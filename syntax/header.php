@@ -53,13 +53,6 @@ class syntax_plugin_mediasyntax_header extends DokuWiki_Syntax_Plugin
 
     if ($level <= $conf['maxseclevel'])
     {
-      // Insert "edit" button or link for this section.
-      $handler->_addCall('section_edit', array(
-        $handler->status['section_edit_start'],
-        $pos-1,
-        $handler->status['section_edit_level'],
-        $handler->status['section_edit_title']
-        ), $pos);
       $handler->status['section_edit_start'] = $pos;
       $handler->status['section_edit_level'] = $level;
       $handler->status['section_edit_title'] = $title;
