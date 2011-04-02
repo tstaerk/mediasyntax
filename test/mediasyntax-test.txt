@@ -35,3 +35,7 @@ This '''is bold, but not //italic//, right?'''
 ''this line is italic''
 
 ''This is an italic [[link]]''. '''This is a bold [[link]]'''.
+
+[[Image:test.png]]
+
+above is the image test.png if you have it

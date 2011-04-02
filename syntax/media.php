@@ -1,6 +1,6 @@
 <?php 
 /** 
- * Media Component of mediasyntax plugin: displays a wiki page within another 
+ * Media Component of mediasyntax plugin: displays media, e.g. an image in a page 
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html) 
  * @author     Esther Brunner <wikidesign@gmail.com>
@@ -27,24 +27,11 @@ class syntax_plugin_mediasyntax_media extends DokuWiki_Syntax_Plugin
     function getPType() { return 'block'; }
 
     function connectTo($mode) 
+    // connect an [[Image:foo.bar]] occurrence to the handler "media"
+    // goal: e.g. show an image
     {  
         $this->Lexer->addSpecialPattern("\[\[Image:.+?\]\]", $mode, 'media');  
     } 
 
-    function handle($match, $state, $pos, &$handler) 
-    {
-
-        $match = substr($match, 2, -2); // strip markup
-        list($match, $flags) = explode('&', $match, 2);
-        // break the pattern up into its parts 
-        list($page, $sect) = preg_split('/#/u', $match, 2); 
-        $mode="page";
-        return array($mode, $page, cleanID($sect), explode('&', $flags)); 
-    }
-
-    function render($format, &$renderer, $data) 
-    {
-        return false;
-    }
 }
 // vim:ts=4:sw=4:et:enc=utf-8:

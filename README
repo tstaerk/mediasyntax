@@ -16,6 +16,7 @@ Do NOT try to install this plugin via un-tarring it. Use plugin manager as descr
 See COPYING for license info.
 
 Change history:
+2011-04-02: 4 hours: Issue 3: allow pictures (aka images)
 2011-01-23: 1 hour: Issue 2: allowed internal links to be italic
 2010-12-10: 2 hours: allowed {{included pages}} as in mediawiki style
 2010-11-21: 1 hour: listblock starting with two ** works now, see https://github.com/tstaerk/mediasyntax/issues#issue/1
