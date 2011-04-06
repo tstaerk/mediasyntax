@@ -12,7 +12,6 @@ require_once(DOKU_PLUGIN.'action.php');
 
 class action_plugin_mediasyntax extends DokuWiki_Action_Plugin 
 {
-
     var $supportedModes = array('xhtml', 'i');
     var $helper = null;
 
@@ -21,24 +20,25 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         $this->helper = plugin_load('helper', 'mediasyntax');
     }
 
-  /**
-   * register the eventhandlers
-   */
-  function register(&$controller)
-  {
-    $controller->register_hook('TOOLBAR_DEFINE',
+    /**
+     * register the eventhandlers
+     */
+    function register(&$controller)
+    {
+        $controller->register_hook('TOOLBAR_DEFINE',
                           'AFTER',
                           $this,
                           'define_toolbar',
                            array());
-      $controller->register_hook('PARSER_CACHE_USE','BEFORE', $this, '_cache_prepare');
-      $controller->register_hook('HTML_EDITFORM_OUTPUT', 'BEFORE', $this, 'handle_form');
-      $controller->register_hook('HTML_CONFLICTFORM_OUTPUT', 'BEFORE', $this, 'handle_form');
-      $controller->register_hook('HTML_DRAFTFORM_OUTPUT', 'BEFORE', $this, 'handle_form');
-      $controller->register_hook('ACTION_SHOW_REDIRECT', 'BEFORE', $this, 'handle_redirect');
-      $controller->register_hook('PARSER_HANDLER_DONE', 'BEFORE', $this, 'handle_parser');
-      $controller->register_hook('PARSER_METADATA_RENDER', 'AFTER', $this, 'handle_metadata');
-  }
+        $controller->register_hook('PARSER_CACHE_USE','BEFORE', $this, '_cache_prepare');
+        $controller->register_hook('HTML_EDITFORM_OUTPUT', 'BEFORE', $this, 'handle_form');
+        $controller->register_hook('HTML_CONFLICTFORM_OUTPUT', 'BEFORE', $this, 'handle_form');
+        $controller->register_hook('HTML_DRAFTFORM_OUTPUT', 'BEFORE', $this, 'handle_form');
+        $controller->register_hook('ACTION_SHOW_REDIRECT', 'BEFORE', $this, 'handle_redirect');
+        $controller->register_hook('PARSER_HANDLER_DONE', 'BEFORE', $this, 'handle_parser');
+        $controller->register_hook('PARSER_METADATA_RENDER', 'AFTER', $this, 'handle_metadata');
+    }
+
     /**
      * Used for debugging purposes only
      */
@@ -93,10 +93,10 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
      */
     function handle_form(&$event, $param) 
     {
-      if (array_key_exists('redirect_id', $_REQUEST)) 
-      {
-        $event->data->addHidden('redirect_id', cleanID($_REQUEST['redirect_id']));
-      }
+        if (array_key_exists('redirect_id', $_REQUEST)) 
+        {
+            $event->data->addHidden('redirect_id', cleanID($_REQUEST['redirect_id']));
+        }
     }
 
     /**
@@ -104,11 +104,11 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
      */
     function handle_redirect(&$event, $param) 
     {
-      if (array_key_exists('redirect_id', $_REQUEST)) 
-      {
-        $event->data['id'] = cleanID($_REQUEST['redirect_id']);
-        $event->data['title'] = '';
-      }
+        if (array_key_exists('redirect_id', $_REQUEST)) 
+        {
+            $event->data['id'] = cleanID($_REQUEST['redirect_id']);
+            $event->data['title'] = '';
+        }
     }
 
     /**
@@ -195,44 +195,45 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         $cache->cache = getCacheName($cache->key, $cache->ext);
     }
  
-  /**
-   * modifiy the toolbar JS defines
-   *
-   * @author  Esther Brunner  <wikidesign@gmail.com>
-   */
-  function define_toolbar(&$event, $param)
-  {      
-    $c = count($event->data);
-    for ($i = 0; $i <= $c; $i++)
-    {    
-      if ($event->data[$i]['icon'] == 'ol.png')
-      {
-        $event->data[$i]['open']  = "# ";
-      } 
-      elseif ($event->data[$i]['icon'] == 'h.png')
-      {
-        $event->data[$i]['list'][0]['open'] = "= ";
-        $event->data[$i]['list'][0]['close']  = " =\\n";
-        $event->data[$i]['list'][1]['open'] = "== ";
-        $event->data[$i]['list'][1]['close']  = " ==\\n";
-      }
-      elseif ($event->data[$i]['icon'] == 'ul.png')
-      {
-        $event->data[$i]['open']  = "* ";
-      }
-      elseif ($event->data[$i]['icon'] == 'italic.png')
-      {
-        $event->data[$i]['open']  = "''";
-        $event->data[$i]['close']  = "''";
-      }
-      elseif ($event->data[$i]['icon'] == 'bold.png')
-      {
-        $event->data[$i]['open']  = "'''";
-        $event->data[$i]['close']  = "'''";
-      }
-   }
-   return true;
-  }
+    /**
+     * modifiy the toolbar JS defines
+     *
+     * @author  Esther Brunner  <wikidesign@gmail.com>
+     */
+    function define_toolbar(&$event, $param)
+    {
+        dbglog("entering function ".__FUNCTION__);
+        $c = count($event->data);
+        for ($i = 0; $i <= $c; $i++)
+        {    
+            if ($event->data[$i]['icon'] == 'ol.png')
+            {
+                $event->data[$i]['open']  = "# ";
+            } 
+            elseif ($event->data[$i]['icon'] == 'h.png')
+            {
+                $event->data[$i]['list'][0]['open'] = "= ";
+                $event->data[$i]['list'][0]['close']  = " =\\n";
+                $event->data[$i]['list'][1]['open'] = "== ";
+                $event->data[$i]['list'][1]['close']  = " ==\\n";
+            }
+            elseif ($event->data[$i]['icon'] == 'ul.png')
+            {
+                $event->data[$i]['open']  = "* ";
+            }
+            elseif ($event->data[$i]['icon'] == 'italic.png')
+            {
+                $event->data[$i]['open']  = "''";
+                $event->data[$i]['close']  = "''";
+            }
+            elseif ($event->data[$i]['icon'] == 'bold.png')
+            {
+                $event->data[$i]['open']  = "'''";
+                $event->data[$i]['close']  = "'''";
+            }
+       }
+       return true;
+    }
 }
 
 //Setup VIM: ex: et ts=4 enc=utf-8 :
