@@ -44,13 +44,9 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
      */
     function handle_metadata(&$event, $param) 
     {
-      global $conf;
-      if($conf['allowdebug']) 
-      {
-          dbglog('---- PLUGIN INCLUDE META DATA START ----');
-          dbglog($event->data);
-          dbglog('---- PLUGIN INCLUDE META DATA END ----');
-      }
+        dbglog('---- PLUGIN INCLUDE META DATA START ----');
+        dbglog($event->data);
+        dbglog('---- PLUGIN INCLUDE META DATA END ----');
     }
 
     /**
