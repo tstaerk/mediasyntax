@@ -19,63 +19,56 @@ require_once(DOKU_PLUGIN.'syntax.php');
 class syntax_plugin_mediasyntax_header extends DokuWiki_Syntax_Plugin 
 {
 
-  function getType(){ return 'container'; }
-  function getPType(){ return 'block'; }
-  function getSort(){ return 49; }
+    function getType()  { return 'container'; }
+    function getPType() { return 'block'; }
+    function getSort()  { return 49; }
   
-  function getAllowedTypes()
-  {
-    return array('formatting', 'substition', 'disabled', 'protected');
-  }
-  
-  function preConnect()
-  {
-    $this->Lexer->addSpecialPattern(
-      '(?m)^[ \t]*=+[^\n]+=+[ \t]*$',
-      'base',
-      'plugin_mediasyntax_header'
-    );
-  }
-  
-  function handle($match, $state, $pos, &$handler)
-  {
-    global $conf;
-    
-    // get level and title
-    $title = trim($match);
-    $level = strspn($title, '=');
-    if ($level < 1) $level = 1;
-    elseif ($level > 5) $level = 5;
-    $title = trim($title, '=');
-    $title = trim($title);
-
-    if ($handler->status['section']) $handler->_addCall('section_close', array(), $pos);
-
-    if ($level <= $conf['maxseclevel'])
+    function getAllowedTypes()
     {
-      // Insert "edit" button or link for this section.
-      $handler->_addCall('section_edit', array(
-        $handler->status['section_edit_start'],
-        $pos-1,
-        $handler->status['section_edit_level'],
-        $handler->status['section_edit_title']
-        ), $pos);
-      $handler->status['section_edit_start'] = $pos;
-      $handler->status['section_edit_level'] = $level;
-      $handler->status['section_edit_title'] = $title;
+        return array('formatting', 'substition', 'disabled', 'protected');
     }
-
-    $handler->_addCall('header', array($title, $level, $pos), $pos);
-
-    $handler->_addCall('section_open', array($level), $pos);
-    $handler->status['section'] = true;
-    return true;
-  }
   
-  function render($mode, &$renderer, $data)
-  {
-    return true;
-  }
+    function preConnect()
+    {
+        $this->Lexer->addSpecialPattern(
+            '(?m)^[ \t]*=+[^\n]+=+[ \t]*$',
+            'base',
+            'plugin_mediasyntax_header'
+        );
+    }
+  
+    function handle($match, $state, $pos, &$handler)
+    {
+        global $conf;
+
+        // get level and title
+        $title = trim($match);
+        $level = strspn($title, '=');
+        if ($level < 1) $level = 1;
+        elseif ($level > 5) $level = 5;
+        $title = trim($title, '=');
+        $title = trim($title);
+
+        if ($handler->status['section']) $handler->_addCall('section_close', array(), $pos);
+
+        if ($level <= $conf['maxseclevel'])
+        {
+            $handler->status['section_edit_start'] = $pos;
+            $handler->status['section_edit_level'] = $level;
+            $handler->status['section_edit_title'] = $title;
+        }
+
+        $handler->_addCall('header', array($title, $level, $pos), $pos);
+
+        $handler->_addCall('section_open', array($level), $pos);
+        $handler->status['section'] = true;
+        return true;
+    }
+  
+    function render($mode, &$renderer, $data)
+    {
+        return true;
+    }
 }
  
 //Setup VIM: ex: et ts=4 enc=utf-8 :
