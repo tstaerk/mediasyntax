@@ -7,6 +7,7 @@
  preformatted text starting one line later
 * a list item directly under a codeblock
  this is a codeblock directly under a list item
+ a codeblock, as opposed to a preblock, can contain <font color=red>red</font> text
 <pre>
 preformatted text in a "pre" tag, line 1
 line 2

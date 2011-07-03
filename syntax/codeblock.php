@@ -19,13 +19,21 @@ require_once(DOKU_PLUGIN.'syntax.php');
 class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin 
 {
 
-  function getType() { return 'protected'; }
+  function getType() { return 'formatting'; }
 
-  function getSort() { return 9; }
+  function getSort() 
+  { 
+    /* 
+      This must be higher prioritized than e.g. listblock.
+      If it is not, then the listblock will "steal" the \n at its end-of-line.
+      Then, a codeblock directly under a listblock will not trigger the \n .* regex.
+    */
+    return 9; 
+  }
   
   function connectTo($mode)
   {
-    $this->Lexer->addEntryPattern(
+    $this->Lexer->addEntryPattern   (
       '\n(?= .*?)',
       $mode,
       'plugin_mediasyntax_codeblock');
@@ -33,7 +41,8 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   
   function postConnect()
   {
-    $this->Lexer->addExitPattern(
+    $this->Lexer->addExitPattern
+    (
       '(?=\n[^ ].*?)',
       'plugin_mediasyntax_codeblock'
     );
@@ -41,22 +50,52 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   
   function handle($match, $state, $pos, &$handler)
   {
-    if ($state == DOKU_LEXER_UNMATCHED)
+        // $match2 = $match, but cut one blank at the beginning of every line.
+        for ($i=1;$i<strlen($match);$i++) 
+        {
+          if ($match[$i-1] == "\n" && $match[$i] == " ") then ;
+          else $match2.=$match[$i];
+        }
+        switch ($state) 
+        {
+            case DOKU_LEXER_ENTER : 
+                return array($state, $match2);
+            case DOKU_LEXER_MATCHED :
+                return array($state, $match2);
+            case DOKU_LEXER_UNMATCHED :
+                return array($state, $match2);
+            case DOKU_LEXER_EXIT :
+                return array($state, $match2);
+            case DOKU_LEXER_SPECIAL :
+                //break;
+        }
+        return false;
+/*    if ($state == DOKU_LEXER_UNMATCHED)
     {
-       // $match2 = $match, but cut one blank at the beginning of every line.
-       for ($i=1;$i<strlen($match);$i++) 
-       {
-         if ($match[$i-1] == "\n" && $match[$i] == " ") then ;
-         else $match2.=$match[$i];
-       }
-       $handler->_addCall('preformatted', array($match2), $pos);
+       return array($state, $match2);
     }
-    return true;
+    return false;
+*/
   }
   
   function render($mode, &$renderer, $data)
   {
-    return true;
+      if($mode == 'xhtml')
+      {
+          list($state,$match) = $data;
+          $match=$data[1];
+          $state=$data[0];
+          switch ($state) 
+          {
+                case DOKU_LEXER_ENTER :
+                    //$renderer->doc .= "enter$match";
+                case DOKU_LEXER_UNMATCHED :
+                    //$renderer->doc .= "<pre>$match</pre>";
+                case DOKU_LEXER_EXIT :
+                    if ($match != "") $renderer->doc .= "<pre>$match</pre>";
+          }
+      }
+      return true;
   }
 }
      
