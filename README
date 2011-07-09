@@ -11,21 +11,14 @@ Do NOT try to install this plugin via un-tarring it. Use plugin manager as descr
 (c) 2005-2007 by Esther Brunner <wikidesign@gmail.com>
 (c) 2008 by Gina Häußge, Michael Klier <dokuwiki@chimeric.de>
 (c) 2006 by Allen Ormond <aormond atgmaildotcom> (was goto plugin, now redirect component)
-<<<<<<< HEAD
 (c) 2010-2011 by Thorsten Stärk <dev@staerk.de>
-=======
-(c) 2010 - 2011 by Thorsten Stärk <dev@staerk.de>
->>>>>>> c3c9e4d97f0668235a5baefd630c78ec88581d01
 
 See COPYING for license info.
 
 Change history:
-<<<<<<< HEAD
 2011-07-03: 4 hours: allowed bold text in codeblocks, but not in preblocks
-=======
 2011-04-02: 4 hours: Issue 3: allow pictures (aka images)
 2011-01-23: 1 hour: Issue 2: allowed internal links to be italic
->>>>>>> c3c9e4d97f0668235a5baefd630c78ec88581d01
 2010-12-10: 2 hours: allowed {{included pages}} as in mediawiki style
 2010-11-21: 1 hour: listblock starting with two ** works now, see https://github.com/tstaerk/mediasyntax/issues#issue/1
 2010-10-30: 2 hours: made toolbar work
