@@ -16,6 +16,7 @@ Do NOT try to install this plugin via un-tarring it. Use plugin manager as descr
 See COPYING for license info.
 
 Change history:
+2011-07-17: 1 hour: Issue 6: bring date from http://www.dokuwiki.org/plugin:mediasyntax and plugin.info.txt in sync
 2011-07-03: 4 hours: allowed bold text in codeblocks, but not in preblocks
 2011-04-02: 4 hours: Issue 3: allow pictures (aka images)
 2011-01-23: 1 hour: Issue 2: allowed internal links to be italic
