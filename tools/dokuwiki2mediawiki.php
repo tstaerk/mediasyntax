@@ -13,7 +13,7 @@
 
 if ($argc==1)
 {
-  echo "dokuwiki2mediawiki.php (c) 2010 by Thorsten Staerk\n";
+  echo "dokuwiki2mediawiki.php (c) 2010-2012 by Thorsten Staerk\n";
   echo "This program converts dokuwiki syntax to mediawiki syntax.\n";
   echo "The source file is given as an argument, the target file is the same plus the suffix \".mod\"\n";
   echo "Usage: php dokuwiki2mediawiki <file>\n";
@@ -90,6 +90,9 @@ for ($argument=1;$argument<$argc;$argument++)
         }
         // end of replace ordered list items
 
+        // replace tables
+        $line=preg_replace("/^\^/","{| class=\"wikitable sortable\" border=1\n!",$line);
+        $line=preg_replace("/\^/","!!",$line);
         fwrite($outputfile,$line);
       }
     }
