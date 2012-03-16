@@ -11,6 +11,8 @@
 // test if we overwrite a file
 // test if file exists
 
+$in_table=false;
+
 if ($argc==1)
 {
   echo "dokuwiki2mediawiki.php (c) 2010-2012 by Thorsten Staerk\n";
@@ -91,8 +93,23 @@ for ($argument=1;$argument<$argc;$argument++)
         // end of replace ordered list items
 
         // replace tables
-        $line=preg_replace("/^\^/","{| class=\"wikitable sortable\" border=1\n!",$line);
-        $line=preg_replace("/\^/","!!",$line);
+        if (preg_match("/^\^/",$line))
+	{
+	  $line=preg_replace("/^\^/","{| class=\"wikitable sortable\" border=1\n!",$line);
+          $line=preg_replace("/\^/","!!",$line);
+	}
+	if (preg_match("/^\|/",$line))
+	{
+	  $line=preg_replace("/\|/","||",$line);
+	  $line=preg_replace("/^\|\|/","|-\n| ",$line);
+	  $in_table=true;
+	}
+	// have we left a table?
+	if ((!preg_match("/^\|/",$line)) && $in_table)
+	{
+	  $line="|-\n|}\n".$line;
+	  $in_table=false;
+	}
         fwrite($outputfile,$line);
       }
     }
