@@ -1,0 +1,8 @@
+^ Car ^ Colors ^ Producer ^
+| Audi A5 | black | VAG | 
+| ::: | blue | ::: |
+| ::: | silver | ::: |
+| ::: | white | ::: |
+| BMW 3 | blue | BMW | 
+| ::: | white | ::: |
+| ::: | silver | ::: |
