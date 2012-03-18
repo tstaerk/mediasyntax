@@ -1,5 +1,5 @@
 <?php
-// dokuwiki2mediawiki.php (c) 2010 by Thorsten Staerk
+// dokuwiki2mediawiki.php (c) 2010-2012 by Thorsten Staerk
 // This program reads files containing dokuwiki syntax and converts them into files
 // containing mediawiki syntax.
 // The source file is given by parameter, the target file is the source file plus a
@@ -10,6 +10,7 @@
 // read: not only 4096 bytes
 // test if we overwrite a file
 // test if file exists
+// rowspan in tables should work (::: in dokuwiki syntax)
 
 $in_table=false;
 
