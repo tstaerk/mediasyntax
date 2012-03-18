@@ -221,6 +221,10 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
             {
                 $event->data[$i]['open']  = "* ";
             }
+            elseif ($event->data[$i]['icon'] == 'ol.png')
+            {
+                $event->data[$i]['open']  = "# ";
+            }
             elseif ($event->data[$i]['icon'] == 'italic.png')
             {
                 $event->data[$i]['open']  = "''";
@@ -231,6 +235,11 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
                 $event->data[$i]['open']  = "'''";
                 $event->data[$i]['close']  = "'''";
             }
+            //The following removes hminus and hplus
+            //elseif ($event->data[$i]['icon'] == 'hminus.png')
+            //{
+            //    array_splice($event->data, $i, $i-1);
+            //}
        }
        return true;
     }
