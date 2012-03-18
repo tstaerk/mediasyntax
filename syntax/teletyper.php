@@ -21,8 +21,8 @@ require_once(DOKU_PLUGIN.'syntax.php');
 class syntax_plugin_mediasyntax_teletyper extends DokuWiki_Syntax_Plugin 
 {
 
-  function getType(){ return 'protected'; }
-  function getSort(){ return 40; }
+  function getType() { return 'protected'; }
+  function getSort() { return 40; }
  
   function connectTo($mode)
   {
@@ -43,8 +43,7 @@ class syntax_plugin_mediasyntax_teletyper extends DokuWiki_Syntax_Plugin
   
   function handle($match, $state, $pos, &$handler)
   {
-    dbglog("entering function handle, match is $match, state is $state, pos is $pos");
-    dbglog(gettype($handler));
+    dbglog("entering function ".__FUNCTION__.", match is $match, state is $state, pos is $pos");
     if ($state == DOKU_LEXER_UNMATCHED) return array($state,$match);
     if ($state == DOKU_LEXER_ENTER) return array($state,$match);
     if ($state == DOKU_LEXER_EXIT) return array($state,$match);
@@ -54,8 +53,7 @@ class syntax_plugin_mediasyntax_teletyper extends DokuWiki_Syntax_Plugin
   // For understanding this see the very valuable code by Christopher Smith on http://www.dokuwiki.org/devel:syntax_plugins
   // $data is always what the function handle returned!
   {
-    dbglog("entering function render, mode is $mode, data is $data, data's type is ".gettype($data));
-    dbglog($renderer->doc);
+    dbglog("entering function ".__FUNCTION__.", mode is $mode, data is $data, data's type is ".gettype($data));
     list($state,$match) = $data;
     dbglog("state is $state, match is $match");
     if ($mode == 'xhtml')
