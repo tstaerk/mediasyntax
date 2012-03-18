@@ -16,6 +16,7 @@ Do NOT try to install this plugin via un-tarring it. Use plugin manager as descr
 See COPYING for license info.
 
 Change history:
+2012-03-18: 4 hours: add teletyper tag tt
 2012-03-18: 2 hours: fix toolbar regarding hminus and ol
 2012-03-18: 1 hour: testcase for converting dokuwiki style tables to mediawiki
 2012-03-17: 1 hour: allow converting dokuwiki style tables to mediawiki

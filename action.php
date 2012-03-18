@@ -203,6 +203,9 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     function define_toolbar(&$event, $param)
     {
         dbglog("entering function ".__FUNCTION__);
+        dbglog("event->data follows");
+        dbglog($event->data);
+        dbglog("event->data ends");
         $c = count($event->data);
         for ($i = 0; $i <= $c; $i++)
         {    
@@ -229,6 +232,12 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
             {
                 $event->data[$i]['open']  = "''";
                 $event->data[$i]['close']  = "''";
+            }
+            elseif ($event->data[$i]['icon'] == 'mono.png')
+            {
+                $event->data[$i]['open']  = "<tt>";
+                $event->data[$i]['close']  = "</tt>";
+                $event->data[$i]['block']  = 1;
             }
             elseif ($event->data[$i]['icon'] == 'bold.png')
             {
