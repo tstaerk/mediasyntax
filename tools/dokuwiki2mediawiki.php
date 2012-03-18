@@ -112,6 +112,8 @@ for ($argument=1;$argument<$argc;$argument++)
 	}
         fwrite($outputfile,$line);
       }
+      // is the end of file also an end of table?
+      if ($in_table) {fwrite($outputfile,"\n|-\n|}\n");}
     }
   }
   fclose ($inputfile);
