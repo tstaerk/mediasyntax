@@ -102,6 +102,10 @@ for ($argument=1;$argument<$argc;$argument++)
       }
       // end of replace ordered list items
 
+      // replace //
+      $line=preg_replace("/\/\//","''",$line);
+      // end of replace //
+
       // replace tables
       if (preg_match("/^\^/",$line))
       {
