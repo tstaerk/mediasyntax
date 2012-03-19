@@ -44,9 +44,8 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
      */
     function handle_metadata(&$event, $param) 
     {
-        dbglog('---- PLUGIN INCLUDE META DATA START ----');
-        dbglog($event->data);
-        dbglog('---- PLUGIN INCLUDE META DATA END ----');
+	dbglog("entering function ".__FUNCTION__);
+        //$event->data contains things like creator, last change etc.
     }
 
     /**
@@ -206,6 +205,7 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         dbglog("event->data follows");
         dbglog($event->data);
         dbglog("event->data ends");
+        array_splice($event->data, 5,3);
         $c = count($event->data);
         for ($i = 0; $i <= $c; $i++)
         {    
@@ -244,11 +244,6 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
                 $event->data[$i]['open']  = "'''";
                 $event->data[$i]['close']  = "'''";
             }
-            //The following removes hminus and hplus
-            //elseif ($event->data[$i]['icon'] == 'hminus.png')
-            //{
-            //    array_splice($event->data, $i, $i-1);
-            //}
        }
        return true;
     }
