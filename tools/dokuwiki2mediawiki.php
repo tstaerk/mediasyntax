@@ -123,7 +123,6 @@ for ($argument=1;$argument<$argc;$argument++)
       {
         $line="|-\n|}\n".$line;
         $in_table=false;
-        fwrite($outputfile,$line);
       }
       fwrite($outputfile,$line);
     } //while (++$i<$linecount)
