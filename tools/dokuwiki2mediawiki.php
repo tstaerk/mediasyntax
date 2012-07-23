@@ -77,7 +77,7 @@ for ($argument=1;$argument<$argc;$argument++)
       $level=0; // level of bulletpoints, e.g. * is level 1, *** is level 3.
       while (preg_match('/^(  )+\*/',$lines[$i]))
       {
-        $line=preg_replace("/^  /","",$lines[$i]);
+        $lines[$i]=preg_replace("/^  /","",$lines[$i]);
         $level++;
       }
       while ($level>1)
@@ -91,7 +91,7 @@ for ($argument=1;$argument<$argc;$argument++)
       $level=0; // level of list items, e.g. - is level 1, --- is level 3.
       while (preg_match('/^(  )+\-/',$lines[$i]))
       {
-        $line=preg_replace("/^  /","",$lines[$i]);
+        $lines[$i]=preg_replace("/^  /","",$lines[$i]);
         $level++;
       }
       $line=preg_replace("/^-/","#",$lines[$i]);

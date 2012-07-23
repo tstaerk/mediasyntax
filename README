@@ -16,6 +16,7 @@ Do NOT try to install this plugin via un-tarring it. Use plugin manager as descr
 See COPYING for license info.
 
 Change history:
+2012-07-23: 1 hour: converter: do not hang on lists
 2012-07-20: 1 hour: converter: replace ** with '''
 2012-03-19: 2 hours: fix hplus and hminus in toolbar, convert italic from dokuwiki to mediawiki
 2012-03-18: 4 hours: add teletyper tag tt
@@ -50,3 +51,4 @@ Change history:
 2010-04-03: 1 hour:  testcase & two adjacent preformatted lines fix
 2010-04-02: 4 hours: single blank at beginning of line makes preformatted text
 2010-03-29: 2 hours: created mediasyntax from creole plugin
+

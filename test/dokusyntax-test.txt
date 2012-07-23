@@ -1,4 +1,8 @@
 this is //italic//
+
+This is a list
+  - this is item 1
+
 ^ Car ^ Colors ^ Producer ^
 | Audi A5 | black | VAG | 
 | ::: | blue | ::: |
@@ -7,3 +11,4 @@ this is //italic//
 | BMW 3 | blue | BMW | 
 | ::: | white | ::: |
 | ::: | silver | ::: |
+
