@@ -26,7 +26,6 @@ for ($argument=1;$argument<$argc;$argument++)
 {
   $filename=$argv[$argument];
   $inputfile=fopen($filename,"r");
-  $outputfile=fopen($filename.".mod","w");
   $i=0;
   $output="";
   if ($inputfile) 
@@ -40,105 +39,102 @@ for ($argument=1;$argument<$argc;$argument++)
   $linecount=$i;
   $i=-1;
 
-  if ($outputfile)
+  while (++$i<$linecount)
   {
-    while (++$i<$linecount)
+    // replace headings
+    if (preg_match('/^ *======.*====== *$/',$lines[$i]))
     {
-      echo $i;
-      echo $lines[$i];
-      // replace headings
-      if (preg_match('/^ *======.*====== *$/',$lines[$i]))
-      {
-        $line=preg_replace('/^ *======/','=',$lines[$i]);
-        $line=preg_replace('/====== *$/','=',$lines[$i]);
-      }
-      elseif (preg_match('/^ *=====.*===== *$/',$lines[$i]))
-      {
-        $line=preg_replace('/^ *=====/','==',$lines[$i]);
-        $line=preg_replace('/===== *$/','==',$lines[$i]);
-      }
-      elseif (preg_match('/^ *====.*==== *$/',$lines[$i]))
-      {
-        $line=preg_replace('/^ *====/','===',$lines[$i]);
-        $line=preg_replace('/==== *$/','===',$lines[$i]);
-      }
-      elseif (preg_match('/^ *===.*=== *$/',$lines[$i]))
-      {
-        $line=preg_replace('/^ *===/','====',$lines[$i]);
-        $line=preg_replace('/=== *$/','====',$lines[$i]);
-      }
-      elseif (preg_match('/^ *==.*== *$/',$lines[$i]))
-      {
-        $line=preg_replace('/^ *==/','=====',$lines[$i]);
-        $line=preg_replace('/== *$/','=====',$lines[$i]);
-      }
-      // end of replace headings
+      $line=preg_replace('/^ *======/','=',$lines[$i]);
+      $line=preg_replace('/====== *$/','=',$lines[$i]);
+    }
+    elseif (preg_match('/^ *=====.*===== *$/',$lines[$i]))
+    {
+      $line=preg_replace('/^ *=====/','==',$lines[$i]);
+      $line=preg_replace('/===== *$/','==',$lines[$i]);
+    }
+    elseif (preg_match('/^ *====.*==== *$/',$lines[$i]))
+    {
+      $line=preg_replace('/^ *====/','===',$lines[$i]);
+      $line=preg_replace('/==== *$/','===',$lines[$i]);
+    }
+    elseif (preg_match('/^ *===.*=== *$/',$lines[$i]))
+    {
+      $line=preg_replace('/^ *===/','====',$lines[$i]);
+      $line=preg_replace('/=== *$/','====',$lines[$i]);
+    }
+    elseif (preg_match('/^ *==.*== *$/',$lines[$i]))
+    {
+      $line=preg_replace('/^ *==/','=====',$lines[$i]);
+      $line=preg_replace('/== *$/','=====',$lines[$i]);
+    }
+    // end of replace headings
 
-      // replace bulletpoints
-      $level=0; // level of bulletpoints, e.g. * is level 1, *** is level 3.
-      while (preg_match('/^(  )+\*/',$lines[$i]))
-      {
-        $lines[$i]=preg_replace("/^  /","",$lines[$i]);
-        $level++;
-      }
-      while ($level>1)
-      {
-        $lines[$i]="*".$lines[$i];
-        $level--;
-      }
-      // end of replace bulletpoints
+    // replace bulletpoints
+    $level=0; // level of bulletpoints, e.g. * is level 1, *** is level 3.
+    while (preg_match('/^(  )+\*/',$lines[$i]))
+    {
+      $lines[$i]=preg_replace("/^  /","",$lines[$i]);
+      $level++;
+    }
+    while ($level>1)
+    {
+      $lines[$i]="*".$lines[$i];
+      $level--;
+    }
+    // end of replace bulletpoints
 
-      // replace ordered list items
-      $level=0; // level of list items, e.g. - is level 1, --- is level 3.
-      while (preg_match('/^(  )+\-/',$lines[$i]))
-      {
-        $lines[$i]=preg_replace("/^  /","",$lines[$i]);
-        $level++;
-      }
-      $line=preg_replace("/^-/","#",$lines[$i]);
-      while ($level>1)
-      {
-        $line="#".$line;
-        $level--;
-      }
-      // end of replace ordered list items
+    // replace ordered list items
+    $level=0; // level of list items, e.g. - is level 1, --- is level 3.
+    while (preg_match('/^(  )+\-/',$lines[$i]))
+    {
+      $lines[$i]=preg_replace("/^  /","",$lines[$i]);
+      $level++;
+    }
+    $line=preg_replace("/^-/","#",$lines[$i]);
+    while ($level>1)
+    {
+      $line="#".$line;
+      $level--;
+    }
+    // end of replace ordered list items
 
-      // replace //
-      $line=preg_replace("/\/\//","''",$line);
-      // end of replace //
+    // replace //
+    $line=preg_replace("/\/\//","''",$line);
+    // end of replace //
 
-      // replace **
-      $line=preg_replace("/\*\*/","'''",$line);
-      // end of replace **
+    // replace **
+    $line=preg_replace("/\*\*/","'''",$line);
+    // end of replace **
 
-      if (preg_match("/^\|/",$line))
-      {
-        if (!$in_table) {$output.="{| class=\"wikitable sortable\" border=1\n";}
-        $line=preg_replace("/\|/","||",$line);
-        $line=preg_replace("/^\|\|/","|-\n| ",$line);
-        $in_table=true;
-      }
-      // have we left a table?
-      if ((!preg_match("/^\|/",$line)) && $in_table)
-      {
-        $line="|-\n|}\n".$line;
-        $in_table=false;
-      }
-      // replace tables
-      if (preg_match("/^\^/",$line))
-      {
-        $output.="{| class=\"wikitable sortable\" border=1\n";
-        $line=preg_replace("/^\^/","!",$line);
-        $line=preg_replace("/\^/","!!",$line);
-        $in_table=true;
-      }
+    if (preg_match("/^\|/",$line))
+    {
+      if (!$in_table) {$output.="{| class=\"wikitable sortable\" border=1\n";}
+      $line=preg_replace("/\|/","||",$line);
+      $line=preg_replace("/^\|\|/","|-\n| ",$line);
+      $in_table=true;
+    }
+    // have we left a table?
+    if ((!preg_match("/^\|/",$line)) && $in_table)
+    {
+      $line="|-\n|}\n".$line;
+      $in_table=false;
+    }
+    // replace tables
+    if (preg_match("/^\^/",$line))
+    {
+      $output.="{| class=\"wikitable sortable\" border=1\n";
+      $line=preg_replace("/^\^/","!",$line);
+      $line=preg_replace("/\^/","!!",$line);
+      $in_table=true;
+    }
 
-      $output.=$line;
-    } //while (++$i<$linecount)
-    // is the end of file also an end of table?
-    if ($in_table) {$output.="\n|-\n|}\n";}
-    fwrite($outputfile,$output);
-    fclose ($outputfile);
-  } //if ($outputfile)
+    $output.=$line;
+  } //while (++$i<$linecount)
+  // is the end of file also an end of table?
+  if ($in_table) {$output.="\n|-\n|}\n";}
+  $outputfile=fopen($filename.".mod","w");
+  fwrite($outputfile,$output);
+  fclose ($outputfile);
+  echo $output;
 }
 ?>
