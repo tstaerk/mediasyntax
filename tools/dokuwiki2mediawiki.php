@@ -28,6 +28,7 @@ for ($argument=1;$argument<$argc;$argument++)
   $inputfile=fopen($filename,"r");
   $outputfile=fopen($filename.".mod","w");
   $i=0;
+  $output="";
   if ($inputfile) 
   {
     while (!feof($inputfile))
@@ -115,6 +116,7 @@ for ($argument=1;$argument<$argc;$argument++)
       {
         $line=preg_replace("/^\^/","{| class=\"wikitable sortable\" border=1\n!",$line);
         $line=preg_replace("/\^/","!!",$line);
+        $in_table=true;
       }
       if (preg_match("/^\|/",$line))
       {
@@ -128,10 +130,11 @@ for ($argument=1;$argument<$argc;$argument++)
         $line="|-\n|}\n".$line;
         $in_table=false;
       }
-      fwrite($outputfile,$line);
+      $output.=$line;
     } //while (++$i<$linecount)
     // is the end of file also an end of table?
-    if ($in_table) {fwrite($outputfile,"\n|-\n|}\n");}
+    if ($in_table) {$output.="\n|-\n|}\n";}
+    fwrite($outputfile,$output);
     fclose ($outputfile);
   } //if ($outputfile)
 }
