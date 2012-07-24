@@ -111,15 +111,9 @@ for ($argument=1;$argument<$argc;$argument++)
       $line=preg_replace("/\*\*/","'''",$line);
       // end of replace **
 
-      // replace tables
-      if (preg_match("/^\^/",$line))
-      {
-        $line=preg_replace("/^\^/","{| class=\"wikitable sortable\" border=1\n!",$line);
-        $line=preg_replace("/\^/","!!",$line);
-        $in_table=true;
-      }
       if (preg_match("/^\|/",$line))
       {
+        if (!$in_table) {$output.="{| class=\"wikitable sortable\" border=1\n";}
         $line=preg_replace("/\|/","||",$line);
         $line=preg_replace("/^\|\|/","|-\n| ",$line);
         $in_table=true;
@@ -130,6 +124,15 @@ for ($argument=1;$argument<$argc;$argument++)
         $line="|-\n|}\n".$line;
         $in_table=false;
       }
+      // replace tables
+      if (preg_match("/^\^/",$line))
+      {
+        $output.="{| class=\"wikitable sortable\" border=1\n";
+        $line=preg_replace("/^\^/","!",$line);
+        $line=preg_replace("/\^/","!!",$line);
+        $in_table=true;
+      }
+
       $output.=$line;
     } //while (++$i<$linecount)
     // is the end of file also an end of table?
