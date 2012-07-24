@@ -42,55 +42,57 @@ for ($argument=1;$argument<$argc;$argument++)
   while (++$i<$linecount)
   {
     // replace headings
-    if (preg_match('/^ *======.*====== *$/',$lines[$i]))
+    $line=$lines[$i];
+    if (preg_match('/^ *======.*====== *$/',$line))
     {
-      $line=preg_replace('/^ *======/','=',$lines[$i]);
-      $line=preg_replace('/====== *$/','=',$lines[$i]);
+      $line=preg_replace('/^ *======/','=',$line);
+      $line=preg_replace('/====== *$/','=',$line);
     }
-    elseif (preg_match('/^ *=====.*===== *$/',$lines[$i]))
+    elseif (preg_match('/^ *=====.*===== *$/',$line))
     {
-      $line=preg_replace('/^ *=====/','==',$lines[$i]);
-      $line=preg_replace('/===== *$/','==',$lines[$i]);
+      $line=preg_replace('/^ *=====/','==',$line);
+      $line=preg_replace('/===== *$/','==',$line);
     }
-    elseif (preg_match('/^ *====.*==== *$/',$lines[$i]))
+    elseif (preg_match('/^ *====.*==== *$/',$line))
     {
-      $line=preg_replace('/^ *====/','===',$lines[$i]);
-      $line=preg_replace('/==== *$/','===',$lines[$i]);
+      $line=preg_replace('/^ *====/','===',$line);
+      $line=preg_replace('/==== *$/','===',$line);
     }
-    elseif (preg_match('/^ *===.*=== *$/',$lines[$i]))
+    elseif (preg_match('/^ *===.*=== *$/',$line))
     {
-      $line=preg_replace('/^ *===/','====',$lines[$i]);
-      $line=preg_replace('/=== *$/','====',$lines[$i]);
+      $line=preg_replace('/^ *===/','====',$line);
+      $line=preg_replace('/=== *$/','====',$line);
     }
-    elseif (preg_match('/^ *==.*== *$/',$lines[$i]))
+    elseif (preg_match('/^ *==.*== *$/',$line))
     {
-      $line=preg_replace('/^ *==/','=====',$lines[$i]);
-      $line=preg_replace('/== *$/','=====',$lines[$i]);
+      $line=preg_replace('/^ *==/','=====',$line);
+      $line=preg_replace('/== *$/','=====',$line);
     }
     // end of replace headings
 
     // replace bulletpoints
     $level=0; // level of bulletpoints, e.g. * is level 1, *** is level 3.
-    while (preg_match('/^(  )+\*/',$lines[$i]))
+    while (preg_match('/^(  )+\*/',$line))
     {
-      $lines[$i]=preg_replace("/^  /","",$lines[$i]);
+      $lines[$i]=preg_replace("/^  /","",$line);
       $level++;
     }
     while ($level>1)
     {
-      $lines[$i]="*".$lines[$i];
+      $line="*".$line;
       $level--;
     }
     // end of replace bulletpoints
 
     // replace ordered list items
     $level=0; // level of list items, e.g. - is level 1, --- is level 3.
-    while (preg_match('/^(  )+\-/',$lines[$i]))
+    while (preg_match('/^(  )+\-/',$line))
     {
-      $lines[$i]=preg_replace("/^  /","",$lines[$i]);
+      $line=preg_replace("/^  /","",$line);
       $level++;
     }
-    $line=preg_replace("/^-/","#",$lines[$i]);
+
+    $line=preg_replace("/^-/","#",$line);
     while ($level>1)
     {
       $line="#".$line;
