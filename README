@@ -16,6 +16,7 @@ Do NOT try to install this plugin via un-tarring it. Use plugin manager as descr
 See COPYING for license info.
 
 Change history:
+2012-07-25: 1 hour: issue #9: converter: treat ordered lists right
 2012-07-24: 1 hour: issue #9: converter: treat headings right
 2012-07-23: 2 hours: also convert tables with no headers
 2012-07-23: 1 hour: converter: do not hang on lists

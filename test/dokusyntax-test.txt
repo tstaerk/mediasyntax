@@ -26,3 +26,5 @@ Now a table without headers follows:
 
 | Name | Address |
 | **Name 2** | **Address 2** |
+
+  * New Line
