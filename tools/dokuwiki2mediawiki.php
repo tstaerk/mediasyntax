@@ -111,7 +111,7 @@ for ($argument=1;$argument<$argc;$argument++)
     if (preg_match("/^\|/",$line))
     {
       if (!$in_table) {$output.="{| class=\"wikitable sortable\" border=1\n";}
-      $line=preg_replace("/\|$/","",$line);
+      $line=preg_replace("/\|$/","",$line); // this would make an empty col else
       $line=preg_replace("/\|/","||",$line);
       $line=preg_replace("/^\|\|/","|-\n| ",$line);
       $in_table=true;
@@ -128,6 +128,7 @@ for ($argument=1;$argument<$argc;$argument++)
       $output.="{| class=\"wikitable sortable\" border=1\n";
       $line=preg_replace("/^\^/","!",$line);
       $line=preg_replace("/\^/","!!",$line);
+      $line=preg_replace("/!!$/","",$line); // this would make an empty col else
       $in_table=true;
     }
 
