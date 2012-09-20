@@ -41,6 +41,7 @@ for ($argument=1;$argument<$argc;$argument++)
 
   while (++$i<$linecount)
   {
+    if ($in_table) $row++;
     // replace headings
     $line=$lines[$i];
     if (preg_match('/^ *======.*====== *$/',$line))
@@ -108,37 +109,127 @@ for ($argument=1;$argument<$argc;$argument++)
     $line=preg_replace("/\*\*/","'''",$line);
     // end of replace **
 
+    // begin care for tables
     if (preg_match("/^\|/",$line))
     {
-      if (!$in_table) {$output.="{| class=\"wikitable sortable\" border=1\n";}
-      $line=preg_replace("/\| *$/","",$line); // this would make an empty col else
-      $line=preg_replace("/\|/","||",$line);
-      $line=preg_replace("/^\|\|/","|-\n| ",$line);
-      $in_table=true;
+      $line=preg_replace("/\| *$/","",$line);
+      $line=preg_replace("/\n/","",$line);
+      if (!$in_table)
+      {
+        $in_table=true;
+        $row=1;
+      }
+      $cells[$row]=explode("|",preg_replace("/^\|/","",$line));
     }
+
     // have we left a table?
     if ((!preg_match("/^\|/",$line)) && $in_table)
     {
-      $line="|-\n|}\n".$line;
       $in_table=false;
-    }
+      if ($headers!="")
+      for ($n=0;$n<count($headers);$n=$n+1)
+      {
+        echo $headers[$n]; echo "|";
+      }
+      echo "\n";
+      for ($y=1;$y<count($cells)+1;$y=$y+1)
+      {
+        for ($x=0;$x<count($cells[$y]);$x=$x+1)
+        {
+          echo $cells[$y][$x]; echo "|";
+        }
+        echo "\n";
+      }
+      echo "***** END *****\n";
+      $rowspancells=$cells;
+
+      // each cell's rowspan value is 1
+      for ($y=1;$y<count($cells)+1;$y=$y+1)
+        for ($x=0;$x<count($cells[$y]);$x=$x+1)
+          $rowspancells[$y][$x]=1;
+
+      // every cell that needs an attribute rowspan=x gets x as its rowspan value
+      for ($y=1;$y<count($cells);$y=$y+1)
+      {
+        for ($x=0;$x<count($cells[$y]);$x=$x+1)
+        {
+          $z=1;
+          while (($y+$z<=count($cells)) && (preg_match("/ *::: */",$cells[$y+$z][$x])))
+          {
+            $rowspancells[$y][$x]+=1;
+            $z+=1;
+          }
+        }
+      }
+
+      // if the cell itself if :::, then its rowspan value is 0
+      for ($y=1;$y<count($cells)+1;$y=$y+1)
+        for ($x=0;$x<count($cells[$y]);$x=$x+1)
+          if (preg_match("/ *::: */",$cells[$y][$x])) $rowspancells[$y][$x]=0;
+
+      // display them
+      for ($y=1;$y<count($cells)+1;$y=$y+1)
+      {
+        for ($x=0;$x<count($cells[$y]);$x=$x+1)
+          echo $rowspancells[$y][$x];
+        echo "\n";
+      }
+
+      // begin display the mediawiki table
+      $tablesource="{| class=\"wikitable sortable\" border=1\n";
+      if ($headers!="")
+      {
+        $tablesource.="!";
+        for ($n=0;$n<count($headers);$n=$n+1)
+        {
+          $tablesource.=$headers[$n]; 
+          if ($n<count($headers)-1) $tablesource.="!!";
+        }
+        $tablesource.="\n|-\n";
+      }
+      for ($y=1;$y<count($cells)+1;$y=$y+1)
+      {
+        $tablesource.="| ";
+        for ($x=0;$x<count($cells[$y]);$x=$x+1)
+        {
+          if ($rowspancells[$y][$x]>=1)
+	  {
+            if ($rowspancells[$y][$x]>1) $tablesource.="rowspan=".$rowspancells[$y][$x]."|";
+	    $tablesource.=$cells[$y][$x];
+	    if ($x<count($cells[$y])-1) $tablesource.=" || ";
+	  }
+        }
+        $tablesource.="\n|-\n";
+      }
+      $tablesource.="|}\n";
+      echo $tablesource;
+      $output.=$tablesource;
+      //end display mediawiki table
+
+      $headers="";
+      $cells="";
+      $row=0;
+    } // endif have we left a table
+
     // replace tables
     if (preg_match("/^\^/",$line))
     {
-      $output.="{| class=\"wikitable sortable\" border=1\n";
-      $line=preg_replace("/^\^/","!",$line);
-      $line=preg_replace("/\^/","!!",$line);
-      $line=preg_replace("/!! *$/","",$line); // this would make an empty col else
       $in_table=true;
+      $row=0; // the header row is row 0. It may exist or not.
+      $line=preg_replace("/^\^/","",$line);
+      $line=preg_replace("/\n/","",$line);
+      $line=preg_replace("/\^$/","",$line);
+      $headers=explode("^",$line);
     }
+
+    if ($in_table) $line=""; // if this is in a table then the table's content will be stored in $headers and $cells
+    // end care for tables
 
     $output.=$line;
   } //while (++$i<$linecount)
   // is the end of file also an end of table?
-  if ($in_table) {$output.="\n|-\n|}\n";}
   $outputfile=fopen($filename.".mod","w");
   fwrite($outputfile,$output);
   fclose ($outputfile);
-  echo $output;
 }
 ?>
