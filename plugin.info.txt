@@ -2,6 +2,6 @@ base  mediasyntax
 name  mediasyntax
 author Thorsten Staerk
 email  dev@staerk.de
-date   2011-07-17
+date   2013-08-02
 desc   Mediawiki syntax for Dokuwiki (comes with a converter)
 url    http://www.staerk.de/thorsten/mediasyntax
