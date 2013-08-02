@@ -41,33 +41,20 @@ class syntax_plugin_mediasyntax_nonitalic extends DokuWiki_Syntax_Plugin
   
   function connectTo($mode)
   {
-    $this->Lexer->addEntryPattern(
-      '//(?=[^\x00]*[^:])',
-      $mode,
-      'plugin_mediasyntax_nonitalic'
-    );
+    $this->Lexer->addSpecialPattern('\/\/',$mode,'plugin_mediasyntax_nonitalic');
   }
-  
-  function postConnect()
-  {
-    $this->Lexer->addExitPattern(
-      '//',
-      'plugin_mediasyntax_nonitalic'
-    );
-  }
-  
+
   function handle($match, $state, $pos, &$handler)
   {
-    $match="//".$match."//";
-    if ($state == DOKU_LEXER_UNMATCHED)
-    {
-      $handler->_addCall('unformatted', array($match), $pos);
-    }
-    return true;
+    return array($match, $state, $pos);
   }
   
   function render($mode, &$renderer, $data)
   {
-    return true;
+    if($mode == 'xhtml')
+    {
+      $renderer->doc .= "//";
+    }
+    return false;
   }
 }

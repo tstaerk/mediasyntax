@@ -16,6 +16,7 @@ Do NOT try to install this plugin via un-tarring it. Use plugin manager as descr
 See COPYING for license info.
 
 Change history:
+2013-08-02: 2 hours: do not stop rendering on "//"
 2012-09-20: 4 hours: converter: allow for rowspan
 2012-09-19: 1 hour: converter: do not have empty columns right of your table
 2012-07-25: 1 hour: issue #9: converter: treat ordered lists right
