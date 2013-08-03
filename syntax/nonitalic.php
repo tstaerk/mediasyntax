@@ -29,8 +29,7 @@ class syntax_plugin_mediasyntax_nonitalic extends DokuWiki_Syntax_Plugin
 
   function getSort()
   {
-  // emphasis has a sort of 80. Set this to 70 and it will be active.
-  // Set it to 90 and it will not be active.
+    // to overwrite dokuwiki's default, getSort must deliver a lower value
     return 70;
   }
   
@@ -51,10 +50,8 @@ class syntax_plugin_mediasyntax_nonitalic extends DokuWiki_Syntax_Plugin
   
   function render($mode, &$renderer, $data)
   {
-    if($mode == 'xhtml')
-    {
-      $renderer->doc .= "//";
-    }
+    // This is valid globally, not only for xhtml or so.
+    $renderer->doc .= "//";
     return false;
   }
 }
