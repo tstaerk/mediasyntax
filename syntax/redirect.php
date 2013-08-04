@@ -62,7 +62,7 @@ class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin
   {
     if (strlen($data)>0)
     {
-      $renderer->doc .= "You will be redirected in two seconds to $data";
+      $renderer->doc = "You will be redirected in two seconds to $data";
       $renderer->doc .= '<script>url="'.wl($data).'";setTimeout("location.href=url",'.(2000).');</script>';
     }
     return true; 
