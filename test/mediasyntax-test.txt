@@ -33,7 +33,9 @@ normal text with a GB specialPattern in the line
  preformatted text directly under normal text
 This '''is bold, but not //italic//, right?'''
 
-''this line is italic''
+''this line is italic'' // two slashes surround this //
+
+<u>this is underlined</u> __two underscores surround this__
 
 ''This is an italic [[link]]''. '''This is a bold [[link]]'''.
 
