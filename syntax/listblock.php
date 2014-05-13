@@ -32,7 +32,7 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin
   {
     // a list block starts with a new line starting with one or more * or # signs
     $this->Lexer->addEntryPattern(
-      '\n[ \t]*[\#\*]+ *',
+      '^[ \t]*[\#\*]+ *',
       $mode,
       'plugin_mediasyntax_listblock'
     );
