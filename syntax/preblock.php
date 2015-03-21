@@ -41,6 +41,11 @@ class syntax_plugin_mediasyntax_preblock extends DokuWiki_Syntax_Plugin
   }
   
   function handle($match, $state, $pos, &$handler)
+  // This first gets called with $state=1 and $match is the entryPattern that matched. 
+  // Then it (the function handle) gets called with $state=3 and $match is the text
+  // between the entryPattern and the exitPattern.
+  // Then it gets called with $state=4 and $match is the exitPattern.
+  // What this delivers is what is handed over as $data to the function render.
   {
     if ($state == DOKU_LEXER_UNMATCHED)
     {
