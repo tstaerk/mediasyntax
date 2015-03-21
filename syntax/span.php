@@ -19,27 +19,18 @@ require_once(DOKU_PLUGIN.'syntax.php');
 class syntax_plugin_mediasyntax_span extends DokuWiki_Syntax_Plugin 
 {
 
-  function getType(){ return 'protected'; }
+  function getType(){ return 'paragraphs'; }
   // If I choose "protected", the span works perfect, but what's within 
   // <span> and </span> will not get dokuwiki-parsed. 
   // If I choose "substitution" it's the other way round.
   
-  function getSort(){ return 32; }
+  function getSort(){ return 100; }
   
   function connectTo($mode)
   {
-    $this->Lexer->addEntryPattern(
-      //'<span\>*?',
-      '<span.*?>',
+    $this->Lexer->addSpecialPattern(
+      '</*span.*?>', // .*? means "zero, one or more occurrences of any character except newline, non-greedy
       $mode,
-      'plugin_mediasyntax_span'
-    );
-  }
-  
-  function postConnect()
-  {
-    $this->Lexer->addExitPattern(
-      '</span>',
       'plugin_mediasyntax_span'
     );
   }
