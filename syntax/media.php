@@ -51,13 +51,15 @@ class syntax_plugin_mediasyntax_media extends DokuWiki_Syntax_Plugin
   // $data[1] is always $state
   // $data[3] is always $pos
   {
-    $match=$data[0];
-    $end=preg_replace("/^\[\[Image:/","",$match);
-    $start=preg_replace("/\]\]$/","",$end);
+    $match=$data[0];  // e.g. [[Image:foo.png|50px]]
+    $end=preg_replace("/^\[\[Image:/","",$match);  // e.g. foo.png|50px]]
+    $start=preg_replace("/\]\]$/","",$end);  // e.g.. foo.png|50px
+    $filename=preg_replace("/\|.*$/","",$start);  // e.g. foo.png
+    $pipe=preg_replace("/.*\|/","",$start);  // e.g. 50px
     
     if($mode == 'xhtml')
     {
-      $renderer->doc.= '<img src="'.DOKU_BASE.'lib/exe/fetch.php?media='.$start.'"/>';
+      $renderer->doc.= '<img src="'.DOKU_BASE.'lib/exe/fetch.php?media='.$filename.'" width='.$pipe.' />';
     }
     return false;
   }
