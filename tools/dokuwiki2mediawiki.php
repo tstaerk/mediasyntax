@@ -1,5 +1,5 @@
 <?php
-// dokuwiki2mediawiki.php (c) 2010-2012 by Thorsten Staerk
+// dokuwiki2mediawiki.php (c) 2010-2015 by Thorsten Staerk
 // This program reads files containing dokuwiki syntax and converts them into files
 // containing mediawiki syntax.
 // The source file is given by parameter, the target file is the source file plus a
@@ -108,6 +108,11 @@ for ($argument=1;$argument<$argc;$argument++)
     // replace **
     $line=preg_replace("/\*\*/","'''",$line);
     // end of replace **
+    
+    // replace \\
+    // thanks to Rakete Kalle
+    $line=preg_replace("/\\\\\\\\ /","<br />",$line);
+    // end of replace \\
 
     // begin care for tables
     if (preg_match("/^\|/",$line))
