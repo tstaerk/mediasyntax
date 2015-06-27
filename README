@@ -16,6 +16,7 @@ Do NOT try to install this plugin via un-tarring it. Use plugin manager as descr
 See COPYING for license info.
 
 Change history:
+2015-06-27: 1 hour: enable linking to PDF
 2013-08-04: 1 hour: do not show "you will be redirected"... inside an <ol>
 2013-08-04: 1 hour: keep "__". It is not a markup for <u>
 2013-08-03: 1 hour: keep the stars. "**" does not mean "bold"
