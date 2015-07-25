@@ -33,6 +33,7 @@ class syntax_plugin_mediasyntax_media extends DokuWiki_Syntax_Plugin
   function connectTo($mode) 
   {  
     $this->Lexer->addSpecialPattern("\[\[Image:.+?\]\]", $mode, 'plugin_mediasyntax_media');  
+    $this->Lexer->addSpecialPattern("\[\[File:.+?\]\]", $mode, 'plugin_mediasyntax_media');
   } 
   
   function handle($match, $state, $pos, &$handler)
@@ -52,7 +53,7 @@ class syntax_plugin_mediasyntax_media extends DokuWiki_Syntax_Plugin
   // $data[3] is always $pos
   {
     $match=$data[0];  // e.g. [[Image:foo.png|50px]]
-    $end=preg_replace("/^\[\[Image:/","",$match);  // e.g. foo.png|50px]]
+    $end=preg_replace("/^\[\[Image:|^\[\[File:/","",$match);  // e.g. foo.png|50px]]
     $start=preg_replace("/\]\]$/","",$end);  // e.g.. foo.png|50px
     $filename=preg_replace("/\|.*$/","",$start);  // e.g. foo.png
     $extension=preg_replace("/.*\./","",$filename); // e.g. png
