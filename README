@@ -16,6 +16,7 @@ Do NOT try to install this plugin via un-tarring it. Use plugin manager as descr
 See COPYING for license info.
 
 Change history:
+2015-07-26: 1 hour: added tool to update mediasyntax on www.staerk.de
 2015-07-25: 1 hour: allow [[File: instead of [[Image:
 2015-06-27: 1 hour: enable linking to PDF
 2013-08-04: 1 hour: do not show "you will be redirected"... inside an <ol>
