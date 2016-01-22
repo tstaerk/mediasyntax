@@ -27,12 +27,12 @@ class syntax_plugin_mediasyntax_bold extends DokuWiki_Syntax_Plugin
     $this->Lexer->addSpecialPattern('\'\'\'',$mode,'plugin_mediasyntax_bold');
   }
  
-  function handle($match, $state, $pos, &$handler) 
+  function handle($match, $state, $pos, Doku_Handler $handler) 
   {
     return array($match, $state, $pos);
   }
  
-  function render($mode, &$renderer, $data) 
+  function render($mode, Doku_Renderer $renderer, $data) 
   {
     GLOBAL $bold;
     if($mode == 'xhtml')

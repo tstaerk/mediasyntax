@@ -33,7 +33,7 @@ class syntax_plugin_mediasyntax_include extends DokuWiki_Syntax_Plugin
         $this->Lexer->addSpecialPattern("{{.+?}}", $mode, 'plugin_mediasyntax_include');  
     } 
 
-    function handle($match, $state, $pos, &$handler) 
+    function handle($match, $state, $pos, Doku_Handler $handler) 
     {
 
         $match = substr($match, 2, -2); // strip markup
@@ -44,7 +44,7 @@ class syntax_plugin_mediasyntax_include extends DokuWiki_Syntax_Plugin
         return array($mode, $page, cleanID($sect), explode('&', $flags)); 
     }
 
-    function render($format, &$renderer, $data) 
+    function render($format, Doku_Renderer $renderer, $data) 
     {
         return false;
     }

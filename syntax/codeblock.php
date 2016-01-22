@@ -48,7 +48,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
     );
   }
   
-  function handle($match, $state, $pos, &$handler)
+  function handle($match, $state, $pos, Doku_Handler $handler)
   {
         // $match2 = $match, but cut one blank at the beginning of every line.
         for ($i=1;$i<strlen($match);$i++) 
@@ -78,7 +78,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
 */
   }
   
-  function render($mode, &$renderer, $data)
+  function render($mode, Doku_Renderer $renderer, $data)
   {
       if($mode == 'xhtml')
       {

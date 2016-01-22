@@ -51,7 +51,7 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin
     );
   }
   
-  function handle($match, $state, $pos, &$handler)
+  function handle($match, $state, $pos, Doku_Handler $handler)
   {
     switch ($state)
     {
@@ -77,7 +77,7 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin
     return true;
   }
   
-  function render($mode, &$renderer, $data)
+  function render($mode, Doku_Renderer $renderer, $data)
   {
     return true;
   }
