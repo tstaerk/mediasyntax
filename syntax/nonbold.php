@@ -44,12 +44,12 @@ class syntax_plugin_mediasyntax_nonbold extends DokuWiki_Syntax_Plugin
     $this->Lexer->addSpecialPattern('\*\*',$mode,'plugin_mediasyntax_nonbold');
   }
 
-  function handle($match, $state, $pos, &$handler)
+  function handle($match, $state, $pos, Doku_Handler $handler)
   {
     return array($match, $state, $pos);
   }
   
-  function render($mode, &$renderer, $data)
+  function render($mode, Doku_Renderer $renderer, $data)
   {
     if($mode == 'xhtml')
     {

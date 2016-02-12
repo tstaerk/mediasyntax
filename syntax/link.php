@@ -40,7 +40,7 @@ class syntax_plugin_mediasyntax_link extends DokuWiki_Syntax_Plugin
     );
   }
   
-  function handle($match, $state, $pos, &$handler)
+  function handle($match, $state, $pos, Doku_Handler $handler)
   {
     if ($state == DOKU_LEXER_UNMATCHED)
     {
@@ -52,7 +52,7 @@ class syntax_plugin_mediasyntax_link extends DokuWiki_Syntax_Plugin
     return true;
   }
   
-  function render($mode, &$renderer, $data) { return true; }
+  function render($mode, Doku_Renderer $renderer, $data) { return true; }
 }
      
 //Setup VIM: ex: et ts=4 enc=utf-8 :

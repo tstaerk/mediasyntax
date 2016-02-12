@@ -43,12 +43,12 @@ class syntax_plugin_mediasyntax_nonunderline extends DokuWiki_Syntax_Plugin
     $this->Lexer->addSpecialPattern('__',$mode,'plugin_mediasyntax_nonunderline');
   }
 
-  function handle($match, $state, $pos, &$handler)
+  function handle($match, $state, $pos, Doku_Handler $handler)
   {
     return array($match, $state, $pos);
   }
   
-  function render($mode, &$renderer, $data)
+  function render($mode, Doku_Renderer $renderer, $data)
   {
     // This is valid globally, not only for xhtml or so.
     $renderer->doc .= "__";

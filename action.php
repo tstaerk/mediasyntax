@@ -23,7 +23,7 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     /**
      * register the eventhandlers
      */
-    function register(&$controller)
+    function register(Doku_Event_Handler $controller)
     {
         $controller->register_hook('TOOLBAR_DEFINE',
                           'AFTER',

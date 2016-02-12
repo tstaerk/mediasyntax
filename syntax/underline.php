@@ -43,14 +43,14 @@ class syntax_plugin_mediasyntax_underline extends DokuWiki_Syntax_Plugin
     );
   }
   
-  function handle($match, $state, $pos, &$handler)
+  function handle($match, $state, $pos, Doku_Handler $handler)
   {
     if ($state == DOKU_LEXER_UNMATCHED) return array($state,$match);
     if ($state == DOKU_LEXER_ENTER) return array($state,$match);
     if ($state == DOKU_LEXER_EXIT) return array($state,$match);
   }
   
-  function render($mode, &$renderer, $data)
+  function render($mode, Doku_Renderer $renderer, $data)
   // For understanding this see the very valuable code by Christopher Smith on http://www.dokuwiki.org/devel:syntax_plugins
   // $data is always what the function handle returned!
   {

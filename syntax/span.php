@@ -35,7 +35,7 @@ class syntax_plugin_mediasyntax_span extends DokuWiki_Syntax_Plugin
     );
   }
     
-  function handle($match, $state, $pos, &$handler) 
+  function handle($match, $state, $pos, Doku_Handler $handler) 
   // This first gets called with $state=1 and $match is the entryPattern that matched. 
   // Then it (the function handle) gets called with $state=3 and $match is the text
   // between the entryPattern and the exitPattern.
@@ -45,7 +45,7 @@ class syntax_plugin_mediasyntax_span extends DokuWiki_Syntax_Plugin
     return array($match, $state, $pos);
   }
  
-  function render($mode, &$renderer, $data) 
+  function render($mode, Doku_Renderer $renderer, $data) 
   {
     // $data is the return value of handle
     // $data[0] is always $match
