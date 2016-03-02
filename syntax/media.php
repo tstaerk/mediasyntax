@@ -59,15 +59,17 @@ class syntax_plugin_mediasyntax_media extends DokuWiki_Syntax_Plugin
     $extension=preg_replace("/.*\./","",$filename); // e.g. png
     $pipe=preg_replace("/.*\|/","",$start);  // e.g. 50px
     
+    $img_exts = array("png", "jpg", "jpeg", "gif");
+
     if($mode == 'xhtml')
     {
-      if ($extension == "pdf") 
+      if (in_array(strtolower($extension), $img_exts)) 
       {
-        $renderer->doc.= '<a href="'.DOKU_BASE.'lib/exe/fetch.php?media='.$filename.'">File:'.$filename.'</a>';
+        $renderer->doc.= '<img src="'.DOKU_BASE.'lib/exe/fetch.php?media='.$filename.'" width='.$pipe.' />';
       }
       else
       { 
-        $renderer->doc.= '<img src="'.DOKU_BASE.'lib/exe/fetch.php?media='.$filename.'" width='.$pipe.' />';
+        $renderer->doc.= '<a href="'.DOKU_BASE.'lib/exe/fetch.php?media='.$filename.'">File:'.$filename.'</a>';
       }
     }
     return false;
