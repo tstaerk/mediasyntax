@@ -56,8 +56,8 @@ class syntax_plugin_mediasyntax_listblock extends DokuWiki_Syntax_Plugin
     switch ($state)
     {
       case DOKU_LEXER_ENTER:
-        $ReWriter = & new Doku_Handler_List($handler->CallWriter);
-        $ReWriter = & new Doku_Handler_Mediasyntax_List($handler->CallWriter);
+        $ReWriter = new Doku_Handler_List($handler->CallWriter);
+        $ReWriter = new Doku_Handler_Mediasyntax_List($handler->CallWriter);
         $handler->CallWriter = & $ReWriter;
         $handler->_addCall('list_open', array($match), $pos);
         break;
