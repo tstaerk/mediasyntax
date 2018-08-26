@@ -53,7 +53,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
         // $match2 = $match, but cut one blank at the beginning of every line.
         for ($i=1;$i<strlen($match);$i++) 
         {
-          if ($match[$i-1] == "\n" && $match[$i] == " ") then ;
+          if ($match[$i-1] == "\n" && $match[$i] == " ") {;}
           else $match2.=$match[$i];
         }
         switch ($state) 
