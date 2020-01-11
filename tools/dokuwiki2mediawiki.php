@@ -212,7 +212,7 @@ for ($argument=1;$argument<$argc;$argument++)
       //end display mediawiki table
 
       $headers="";
-      $cells="";
+      unset($cells);
       $row=0;
     } // endif have we left a table
 
