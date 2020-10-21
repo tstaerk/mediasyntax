@@ -6,23 +6,12 @@
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Thorsten Staerk
  */
- 
-// must be run within Dokuwiki
-if(!defined('DOKU_INC')) die();
-
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-require_once(DOKU_PLUGIN.'syntax.php');
- 
-/**
- * All DokuWiki plugins to extend the parser/rendering mechanism
- * need to inherit from this class
- */
-class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin 
+class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin
 {
 
   function getType(){ return 'formatting'; }
   function getSort(){ return 58; }
-  
+
   function connectTo($mode)
   {
     $this->Lexer->addEntryPattern(
@@ -41,7 +30,7 @@ class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin
       'plugin_mediasyntax_redirect'
     );
   }
-  
+
   function postConnect()
   {
     $this->Lexer->addExitPattern(
@@ -49,7 +38,7 @@ class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin
       'plugin_mediasyntax_redirect'
     );
   }
-  
+
   function handle($match, $state, $pos, Doku_Handler $handler)
   {
     if ($state == DOKU_LEXER_UNMATCHED)
@@ -57,8 +46,8 @@ class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin
       if ($pos==13) return $match; // position must be at the beginning of the page
     }
   }
-  
-  function render($mode, Doku_Renderer $renderer, $data) 
+
+  function render($mode, Doku_Renderer $renderer, $data)
   {
     if (strlen($data)>0)
     {
@@ -66,8 +55,8 @@ class syntax_plugin_mediasyntax_redirect extends DokuWiki_Syntax_Plugin
       $renderer->doc = 'You will be redirected in '.$delay.' seconds to <a href="' . wl($data) . '">'.$data.'</a>';
       $renderer->doc .= '<script>url="'.wl($data).'";setTimeout("location.href=url",'.($delay*1000).');</script>';
     }
-    return true; 
+    return true;
   }
 }
-     
+
 //Setup VIM: ex: et ts=4 enc=utf-8 :

@@ -7,21 +7,10 @@
 *
 * This file exists so the mediasyntax plugin does not use the ** string as markup for bold
 */
- 
-// must be run within Dokuwiki
-if(!defined('DOKU_INC')) die();
-
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-require_once(DOKU_PLUGIN.'syntax.php');
- 
-/**
-* All DokuWiki plugins to extend the parser/rendering mechanism
-* need to inherit from this class
-*/
 class syntax_plugin_mediasyntax_nonbold extends DokuWiki_Syntax_Plugin
 {
 
-  function getType() 
+  function getType()
   {
   // source: http://github.com/splitbrain/dokuwiki/blob/master/inc/parser/parser.php#L12
     return 'formatting';
@@ -33,12 +22,12 @@ class syntax_plugin_mediasyntax_nonbold extends DokuWiki_Syntax_Plugin
   // Set it to 90 and it will not be active.
     return 10;
   }
-  
+
   function getAllowedTypes()
   {
     return array('formatting', 'substition', 'disabled', 'protected');
   }
-  
+
   function connectTo($mode)
   {
     $this->Lexer->addSpecialPattern('\*\*',$mode,'plugin_mediasyntax_nonbold');
@@ -48,7 +37,7 @@ class syntax_plugin_mediasyntax_nonbold extends DokuWiki_Syntax_Plugin
   {
     return array($match, $state, $pos);
   }
-  
+
   function render($mode, Doku_Renderer $renderer, $data)
   {
     if($mode == 'xhtml')
