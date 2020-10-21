@@ -6,15 +6,6 @@
  * @author     Gina Häußge, Michael Klier <dokuwiki@chimeric.de>
  */
 
-// must be run within Dokuwiki
-if (!defined('DOKU_INC')) die();
-
-if (!defined('DOKU_LF')) define('DOKU_LF', "\n");
-if (!defined('DOKU_TAB')) define('DOKU_TAB', "\t");
-if (!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN', DOKU_INC.'lib/plugins/');
-
-require_once(DOKU_INC.'inc/search.php');
-
 class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plugin
 
     var $includes     = array();
@@ -151,7 +142,7 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
 
     /**
      * Parses the instructions list of the page which contains the includes
-     * 
+     *
      * @author Michael Klier <chi@chimeric.de>
      */
     function parse_instructions($id, &$ins) {
@@ -177,7 +168,7 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
 
             if($ins[$i][0] == 'plugin' && $ins[$i][1][0] == 'mediasyntax_include' ) {
                 // found no previous section set lvl to 0
-                if(!$lvl) $lvl = 0; 
+                if(!$lvl) $lvl = 0;
 
                 $mode  = $ins[$i][1][1][0];
 
@@ -209,7 +200,7 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
                         msg('You have to install the tag plugin to use this functionality!', -1);
                         return;
                     }
-                    $tag   = $ins[$i][1][1][1]; 
+                    $tag   = $ins[$i][1][1][1];
                     $sect  = '';
                     $flags = $ins[$i][1][1][3];
 
@@ -229,13 +220,13 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
                     $i--;
                 }
 
-                if($mode == 'page' || $mode == 'section') 
+                if($mode == 'page' || $mode == 'section')
                 {
                     $page = cleanID($this->_apply_macro($ins[$i][1][1][1]));
                     $perm = auth_quickaclcheck($page);
 
                     array_push($this->hasparts, $page);
-                    
+
                     if($perm >= AUTH_READ)
                     {
 
@@ -247,21 +238,21 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
                       $scope = $page;
                       $flags = $this->get_flags($flags);
 
-                      if(!page_exists($page)) 
+                      if(!page_exists($page))
                       {
-                          if($flags['footer']) 
+                          if($flags['footer'])
                           {
                               $ins[$i] = $this->_footer($page, $sect, '', $flags, 0);
-                          } 
-                          else 
+                          }
+                          else
                           {
                               unset($ins[$i]);
                           }
-                      } 
-                      else 
+                      }
+                      else
                       {
                           $ins_inc = $this->_get_instructions($page, $sect, $mode, $lvl, $flags);
-                          if(!empty($ins_inc)) 
+                          if(!empty($ins_inc))
                           {
                               // combine instructions and reset counter
                               $ins_start = array_slice($ins, 0, $i+1);
@@ -276,7 +267,7 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
             }
 
             // check if we left the range of possible sub includes and reset lvl and scope to toplevel_id
-            if($range && ($i >= $range)) 
+            if($range && ($i >= $range))
             {
                 $lvl = ($prev_lvl == 0) ? 0 : $prev_lvl;
                 $range    = false;
@@ -340,9 +331,9 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
         }
 
         if($flags['firstsec']) {
-            $this->_get_firstsec($ins, $page);  // only first section 
+            $this->_get_firstsec($ins, $page);  // only first section
         }
-        
+
         $ns  = getNS($page);
         $num = count($ins);
 
@@ -460,7 +451,7 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
                     } else {
                         $footer_lvl = $lvl_max;
                     }
-                } 
+                }
             }
         }
 
@@ -529,7 +520,7 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
 
     /**
      * Convert instruction item for a permalink header
-     * 
+     *
      * @author Michael Klier <chi@chimeric.de>
      */
     function _permalink(&$ins, $page, $sect, $flags) {
@@ -537,24 +528,24 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
         $ins[1] = array('mediasyntax_header', array($ins[1][0], $ins[1][1], $page, $sect, $flags));
     }
 
-    /** 
-     * Get a section including its subsections 
+    /**
+     * Get a section including its subsections
      *
      * @author Michael Klier <chi@chimeric.de>
-     */ 
-    function _get_section(&$ins, $sect) { 
+     */
+    function _get_section(&$ins, $sect) {
         $num = count($ins);
         $offset = false;
         $lvl    = false;
         $end    = false;
 
         for($i=0; $i<$num; $i++) {
-            if ($ins[$i][0] == 'header') { 
+            if ($ins[$i][0] == 'header') {
 
-                // found the right header 
-                if (cleanID($ins[$i][1][0]) == $sect) { 
+                // found the right header
+                if (cleanID($ins[$i][1][0]) == $sect) {
                     $offset = $i;
-                    $lvl    = $ins[$i][1][1]; 
+                    $lvl    = $ins[$i][1][1];
                 } elseif ($offset && $lvl && ($ins[$i][1][1] <= $lvl)) {
                     $end = $i - $offset;
                     break;
@@ -566,7 +557,7 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
         if(is_array($ins)) {
             $ins = array_slice($ins, $offset, $end);
         }
-    } 
+    }
 
     /**
      * Only display the first section of a page and a readmore link
@@ -597,22 +588,22 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
     function _apply_macro($id) {
         global $INFO;
         global $auth;
-        
+
         // if we don't have an auth object, do nothing
         if (!$auth) return $id;
 
         $user     = $_SERVER['REMOTE_USER'];
         $group    = $INFO['userinfo']['grps'][0];
 
-        $replace = array( 
-                '@USER@'  => cleanID($user), 
+        $replace = array(
+                '@USER@'  => cleanID($user),
                 '@NAME@'  => cleanID($INFO['userinfo']['name']),
                 '@GROUP@' => cleanID($group),
-                '@YEAR@'  => date('Y'), 
-                '@MONTH@' => date('m'), 
-                '@DAY@'   => date('d'), 
-                ); 
-        return str_replace(array_keys($replace), array_values($replace), $id); 
+                '@YEAR@'  => date('Y'),
+                '@MONTH@' => date('m'),
+                '@DAY@'   => date('d'),
+                );
+        return str_replace(array_keys($replace), array_values($replace), $id);
     }
 }
 //vim:ts=4:sw=4:et:enc=utf-8:
