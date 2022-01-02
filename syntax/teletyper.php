@@ -1,29 +1,18 @@
 <?php
 /**
  * Mediasyntax Plugin: Mediawiki style teletyper text
- * 
+ *
  * This is a part of the mediasyntax plugin for dokuwiki. It handles the <tt> tag.
  *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Thorsten Staerk <dev@staerk.de>
  */
- 
-// must be run within Dokuwiki
-if(!defined('DOKU_INC')) die();
-
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-require_once(DOKU_PLUGIN.'syntax.php');
- 
-/**
- * All DokuWiki plugins to extend the parser/rendering mechanism
- * need to inherit from this class
- */
-class syntax_plugin_mediasyntax_teletyper extends DokuWiki_Syntax_Plugin 
+class syntax_plugin_mediasyntax_teletyper extends DokuWiki_Syntax_Plugin
 {
 
   function getType() { return 'protected'; }
   function getSort() { return 40; }
- 
+
   function connectTo($mode)
   {
     $this->Lexer->addEntryPattern(
@@ -32,7 +21,7 @@ class syntax_plugin_mediasyntax_teletyper extends DokuWiki_Syntax_Plugin
       'plugin_mediasyntax_teletyper'
     );
   }
-  
+
   function postConnect()
   {
     $this->Lexer->addExitPattern(
@@ -40,7 +29,7 @@ class syntax_plugin_mediasyntax_teletyper extends DokuWiki_Syntax_Plugin
       'plugin_mediasyntax_teletyper'
     );
   }
-  
+
   function handle($match, $state, $pos, Doku_Handler $handler)
   {
     dbglog("entering function ".__FUNCTION__.", match is $match, state is $state, pos is $pos");
@@ -48,7 +37,7 @@ class syntax_plugin_mediasyntax_teletyper extends DokuWiki_Syntax_Plugin
     if ($state == DOKU_LEXER_ENTER) return array($state,$match);
     if ($state == DOKU_LEXER_EXIT) return array($state,$match);
   }
-  
+
   function render($mode, Doku_Renderer $renderer, $data)
   // For understanding this see the very valuable code by Christopher Smith on http://www.dokuwiki.org/devel:syntax_plugins
   // $data is always what the function handle returned!
@@ -65,5 +54,5 @@ class syntax_plugin_mediasyntax_teletyper extends DokuWiki_Syntax_Plugin
     return false;
   }
 }
-     
+
 //Setup VIM: ex: et ts=4 enc=utf-8 :

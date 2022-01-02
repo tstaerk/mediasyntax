@@ -7,21 +7,10 @@
 *
 * This file exists so the mediasyntax plugin does not use the __ string as markup for italic
 */
- 
-// must be run within Dokuwiki
-if(!defined('DOKU_INC')) die();
-
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-require_once(DOKU_PLUGIN.'syntax.php');
- 
-/**
-* All DokuWiki plugins to extend the parser/rendering mechanism
-* need to inherit from this class
-*/
 class syntax_plugin_mediasyntax_nonunderline extends DokuWiki_Syntax_Plugin
 {
 
-  function getType() 
+  function getType()
   {
     // source: http://github.com/splitbrain/dokuwiki/blob/master/inc/parser/parser.php#L12
     return 'formatting';
@@ -32,12 +21,12 @@ class syntax_plugin_mediasyntax_nonunderline extends DokuWiki_Syntax_Plugin
     // to overwrite dokuwiki's default, getSort must deliver a lower value
     return 70;
   }
-  
+
   function getAllowedTypes()
   {
     return array('formatting', 'substition', 'disabled', 'protected');
   }
-  
+
   function connectTo($mode)
   {
     $this->Lexer->addSpecialPattern('__',$mode,'plugin_mediasyntax_nonunderline');
@@ -47,7 +36,7 @@ class syntax_plugin_mediasyntax_nonunderline extends DokuWiki_Syntax_Plugin
   {
     return array($match, $state, $pos);
   }
-  
+
   function render($mode, Doku_Renderer $renderer, $data)
   {
     // This is valid globally, not only for xhtml or so.

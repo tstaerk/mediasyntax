@@ -4,18 +4,14 @@
  * @author     Thorsten Staerk <dokuwiki@staerk.de>, Esther Brunner <wikidesign@gmail.com>
  */
 
-// must be run within Dokuwiki
-if(!defined('DOKU_INC')) die();
 
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-require_once(DOKU_PLUGIN.'action.php');
 
-class action_plugin_mediasyntax extends DokuWiki_Action_Plugin 
+class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
 {
     var $supportedModes = array('xhtml', 'i');
     var $helper = null;
 
-    function action_plugin_mediasyntax() 
+    function action_plugin_mediasyntax()
     {
         $this->helper = plugin_load('helper', 'mediasyntax');
     }
@@ -42,7 +38,7 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     /**
      * Used for debugging purposes only
      */
-    function handle_metadata(&$event, $param) 
+    function handle_metadata(Doku_Event $event, $param)
     {
 	dbglog("entering function ".__FUNCTION__);
         //$event->data contains things like creator, last change etc.
@@ -53,24 +49,24 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
      *
      * @author Michael Klier <chi@chimeric.de>
      */
-    function handle_parser(&$event, $param) 
+    function handle_parser(Doku_Event $event, $param)
     {
         global $ID;
 
         // check for stored toplevel ID in helper plugin
         // if it's missing lets see if we have to do anything at all
-        if(!isset($this->helper->toplevel_id)) 
+        if(!isset($this->helper->toplevel_id))
         {
             $ins =& $event->data->calls;
             $num = count($ins);
-            for($i=0; $i<$num; $i++)  
+            for($i=0; $i<$num; $i++)
             {
-                if(($ins[$i][0] == 'plugin')) 
+                if(($ins[$i][0] == 'plugin'))
                 {
-                    switch($ins[$i][1][0]) 
+                    switch($ins[$i][1][0])
                     {
                         case 'mediasyntax_include':
-                            if(!isset($this->helper->toplevel_id)) 
+                            if(!isset($this->helper->toplevel_id))
                             {
                                 $this->helper->toplevel_id = $ID;
                             }
@@ -90,9 +86,9 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     /**
      * Add a hidden input to the form to preserve the redirect_id
      */
-    function handle_form(&$event, $param) 
+    function handle_form(Doku_Event $event, $param)
     {
-        if (array_key_exists('redirect_id', $_REQUEST)) 
+        if (array_key_exists('redirect_id', $_REQUEST))
         {
             $event->data->addHidden('redirect_id', cleanID($_REQUEST['redirect_id']));
         }
@@ -101,9 +97,9 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     /**
      * Modify the data for the redirect when there is a redirect_id set
      */
-    function handle_redirect(&$event, $param) 
+    function handle_redirect(Doku_Event $event, $param)
     {
-        if (array_key_exists('redirect_id', $_REQUEST)) 
+        if (array_key_exists('redirect_id', $_REQUEST))
         {
             $event->data['id'] = cleanID($_REQUEST['redirect_id']);
             $event->data['title'] = '';
@@ -113,7 +109,7 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
     /**
      * prepare the cache object for default _useCache action
      */
-    function _cache_prepare(&$event, $param) 
+    function _cache_prepare(Doku_Event $event, $param)
     {
         global $ID;
         global $INFO;
@@ -126,18 +122,18 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         if(!isset($cache->page) || ($cache->page != $ID)) return;
         if(!isset($cache->mode) || !in_array($cache->mode, $this->supportedModes)) return;
 
-        if(!empty($INFO['userinfo'])) 
+        if(!empty($INFO['userinfo']))
         {
             $include_key = $INFO['userinfo']['name'] . '|' . implode('|', $INFO['userinfo']['grps']);
-        } 
-        else 
+        }
+        else
         {
             $include_key = '@ALL';
         }
 
         $depends = p_get_metadata($ID, 'plugin_mediasyntax');
-        
-        if($conf['allowdebug']) 
+
+        if($conf['allowdebug'])
         {
             dbglog('---- PLUGIN INCLUDE INCLUDE KEY START ----');
             dbglog($include_key);
@@ -148,19 +144,19 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         }
 
         $cache->depends['purge'] = true; // kill some performance
-        if(is_array($depends)) 
+        if(is_array($depends))
         {
             $pages = array();
-            if(!isset($depends['keys'][$include_key])) 
+            if(!isset($depends['keys'][$include_key]))
             {
-                $cache->depends['purge'] = true; // include key not set - request purge 
+                $cache->depends['purge'] = true; // include key not set - request purge
             }
-            else 
+            else
             {
                 $pages = $depends['pages'];
             }
-        } 
-        else 
+        }
+        else
         {
             // nothing to do for us
             return;
@@ -169,13 +165,13 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         // add plugin.info.txt to depends for nicer upgrades
         $cache->depends['files'][] = dirname(__FILE__) . '/plugin.info.txt';
 
-        $key = ''; 
-        foreach($pages as $page) 
+        $key = '';
+        foreach($pages as $page)
         {
             $page = cleanID($this->helper->_apply_macro($page));
             resolve_pageid(getNS($ID), $page, $exists);
             $file = wikiFN($page);
-            if(!in_array($cache->depends['files'], array($file)) && @file_exists($file)) 
+            if(!in_array($cache->depends['files'], array($file)) && @file_exists($file))
             {
                 $cache->depends['files'][] = $file;
                 $key .= '#' . $page . '|ACL' . auth_quickaclcheck($page);
@@ -193,13 +189,13 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         $cache->key .= $key;
         $cache->cache = getCacheName($cache->key, $cache->ext);
     }
- 
+
     /**
      * modifiy the toolbar JS defines
      *
      * @author  Esther Brunner  <wikidesign@gmail.com>
      */
-    function define_toolbar(&$event, $param)
+    function define_toolbar(Doku_Event $event, $param)
     {
         dbglog("entering function ".__FUNCTION__);
         dbglog("event->data follows");
@@ -208,11 +204,11 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
         array_splice($event->data, 5,3);
         $c = count($event->data);
         for ($i = 0; $i <= $c; $i++)
-        {    
+        {
             if ($event->data[$i]['icon'] == 'ol.png')
             {
                 $event->data[$i]['open']  = "# ";
-            } 
+            }
             elseif ($event->data[$i]['icon'] == 'h.png')
             {
                 $event->data[$i]['list'][0]['open'] = "= ";

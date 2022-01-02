@@ -1,36 +1,25 @@
 <?php
 /**
  * Mediasyntax Plugin, preformatted block component: Mediawiki style preformatted text
- * 
+ *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Esther Brunner <wikidesign@gmail.com>
  */
- 
-// must be run within Dokuwiki
-if(!defined('DOKU_INC')) die();
-
-if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
-require_once(DOKU_PLUGIN.'syntax.php');
-
-/**
- * All DokuWiki plugins to extend the parser/rendering mechanism
- * need to inherit from this class
- */
-class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin 
+class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
 {
 
   function getType() { return 'formatting'; }
 
-  function getSort() 
-  { 
-    /* 
+  function getSort()
+  {
+    /*
       This must be higher prioritized than e.g. listblock.
       If it is not, then the listblock will "steal" the \n at its end-of-line.
       Then, a codeblock directly under a listblock will not trigger the \n .* regex.
     */
-    return 9; 
+    return 9;
   }
-  
+
   function connectTo($mode)
   {
     $this->Lexer->addEntryPattern   (
@@ -38,7 +27,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
       $mode,
       'plugin_mediasyntax_codeblock');
   }
-  
+
   function postConnect()
   {
     $this->Lexer->addExitPattern
@@ -47,18 +36,18 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
       'plugin_mediasyntax_codeblock'
     );
   }
-  
+
   function handle($match, $state, $pos, Doku_Handler $handler)
   {
         // $match2 = $match, but cut one blank at the beginning of every line.
-        for ($i=1;$i<strlen($match);$i++) 
+        for ($i=1;$i<strlen($match);$i++)
         {
           if ($match[$i-1] == "\n" && $match[$i] == " ") {;}
           else $match2.=$match[$i];
         }
-        switch ($state) 
+        switch ($state)
         {
-            case DOKU_LEXER_ENTER : 
+            case DOKU_LEXER_ENTER :
                 return array($state, $match2);
             case DOKU_LEXER_MATCHED :
                 return array($state, $match2);
@@ -77,7 +66,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
     return false;
 */
   }
-  
+
   function render($mode, Doku_Renderer $renderer, $data)
   {
       if($mode == 'xhtml')
@@ -85,7 +74,7 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
           list($state,$match) = $data;
           $match=$data[1];
           $state=$data[0];
-          switch ($state) 
+          switch ($state)
           {
                 case DOKU_LEXER_ENTER :
                     //$renderer->doc .= "enter$match";
@@ -98,5 +87,5 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
       return true;
   }
 }
-     
+
 //Setup VIM: ex: et ts=4 enc=utf-8 :
