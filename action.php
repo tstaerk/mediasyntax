@@ -8,10 +8,10 @@
 
 class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
 {
-    var $supportedModes = array('xhtml', 'i');
-    var $helper = null;
+    public $supportedModes = array('xhtml', 'i');
+    public $helper = null;
 
-    function action_plugin_mediasyntax()
+    function __construct()
     {
         $this->helper = plugin_load('helper', 'mediasyntax');
     }
@@ -40,7 +40,7 @@ class action_plugin_mediasyntax extends DokuWiki_Action_Plugin
      */
     function handle_metadata(Doku_Event $event, $param)
     {
-	dbglog("entering function ".__FUNCTION__);
+        dbglog("entering function ".__FUNCTION__);
         //$event->data contains things like creator, last change etc.
     }
 
