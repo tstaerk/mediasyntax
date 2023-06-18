@@ -8,18 +8,18 @@
 
 class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plugin
 
-    var $includes     = array();
-    var $hasparts     = array();
-    var $toplevel_id  = NULL;
-    var $toplevel     = 0;
-    var $defaults     = array();
-    var $include_key  = '';
-    var $sec_close    = true;
+    public $includes     = array();
+    public $hasparts     = array();
+    public $toplevel_id  = NULL;
+    public $toplevel     = 0;
+    public $defaults     = array();
+    public $include_key  = '';
+    public $sec_close    = true;
 
     /**
      * Constructor loads default config settings once
      */
-    function helper_plugin_mediasyntax() {
+    function __construct() {
         $this->defaults['firstsec']  = $this->getConf('firstseconly');
         $this->defaults['editbtn']   = $this->getConf('showeditbtn');
         $this->defaults['taglogos']  = $this->getConf('showtaglogos');
@@ -195,7 +195,7 @@ class helper_plugin_mediasyntax extends DokuWiki_Plugin { // DokuWiki_Helper_Plu
                 }
 
                 if($mode == 'tagtopic') {
-                    $this->taghelper =& plugin_load('helper', 'tag');
+                    $this->taghelper = plugin_load('helper', 'tag');
                     if(!$this->taghelper) {
                         msg('You have to install the tag plugin to use this functionality!', -1);
                         return;
