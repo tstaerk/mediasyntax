@@ -44,14 +44,14 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
   function handle($match, $state, $pos, Doku_Handler $handler)
   {
     // $match2 = $match, but cut one blank at the beginning of every line.
-    $match2 = $match;
+    $match2 = "";
     for ($i = 1; $i < strlen($match); $i++) {
       if ($match[$i - 1] == "\n" && $match[$i] == " ") {;
       } else $match2 .= $match[$i];
     }
     switch ($state) {
       case DOKU_LEXER_ENTER:
-        return array($state, $match2);
+        return false;
       case DOKU_LEXER_MATCHED:
         return array($state, $match2);
       case DOKU_LEXER_UNMATCHED:
