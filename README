@@ -2,7 +2,7 @@
 
 All documentation for the Mediasyntax Plugin is available online at:
 
-  * http://www.staerk.de/thorsten/Mediasyntax
+  * https://www.dokuwiki.org/plugin:mediasyntax
 
 Do NOT try to install this plugin via un-tarring it. Use plugin manager as described in the above link.
 
@@ -11,11 +11,12 @@ Do NOT try to install this plugin via un-tarring it. Use plugin manager as descr
 (c) 2005-2007 by Esther Brunner <wikidesign@gmail.com>
 (c) 2008 by Gina Häußge, Michael Klier <dokuwiki@chimeric.de>
 (c) 2006 by Allen Ormond <aormond atgmaildotcom> (was goto plugin, now redirect component)
-(c) 2010-2015 by Thorsten Stärk <dev@staerk.de>
+(c) 2010-2023 by Thorsten Stärk <dev@staerk.de>
 
 See COPYING for license info.
 
 Change history:
+2023-07-29: 2 hours: adapted to PHP 8 forbidding array and string offset access syntax with curly braces
 2015-07-26: 1 hour: added tool to update mediasyntax on www.staerk.de
 2015-07-25: 1 hour: allow [[File: instead of [[Image:
 2015-06-27: 1 hour: enable linking to PDF
