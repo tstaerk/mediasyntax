@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Mediasyntax Plugin, preformatted block component: Mediawiki style preformatted text
  *
@@ -8,7 +9,10 @@
 class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
 {
 
-  function getType() { return 'formatting'; }
+  function getType()
+  {
+    return 'formatting';
+  }
 
   function getSort()
   {
@@ -22,16 +26,16 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
 
   function connectTo($mode)
   {
-    $this->Lexer->addEntryPattern   (
+    $this->Lexer->addEntryPattern(
       '\n(?= .*?)',
       $mode,
-      'plugin_mediasyntax_codeblock');
+      'plugin_mediasyntax_codeblock'
+    );
   }
 
   function postConnect()
   {
-    $this->Lexer->addExitPattern
-    (
+    $this->Lexer->addExitPattern(
       '(?=\n[^ ].*?)',
       'plugin_mediasyntax_codeblock'
     );
@@ -39,27 +43,26 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
 
   function handle($match, $state, $pos, Doku_Handler $handler)
   {
-        // $match2 = $match, but cut one blank at the beginning of every line.
-        for ($i=1;$i<strlen($match);$i++)
-        {
-          if ($match[$i-1] == "\n" && $match[$i] == " ") {;}
-          else $match2.=$match[$i];
-        }
-        switch ($state)
-        {
-            case DOKU_LEXER_ENTER :
-                return array($state, $match2);
-            case DOKU_LEXER_MATCHED :
-                return array($state, $match2);
-            case DOKU_LEXER_UNMATCHED :
-                return array($state, $match2);
-            case DOKU_LEXER_EXIT :
-                return array($state, $match2);
-            case DOKU_LEXER_SPECIAL :
-                //break;
-        }
-        return false;
-/*    if ($state == DOKU_LEXER_UNMATCHED)
+    // $match2 = $match, but cut one blank at the beginning of every line.
+    $match2 = $match;
+    for ($i = 1; $i < strlen($match); $i++) {
+      if ($match[$i - 1] == "\n" && $match[$i] == " ") {;
+      } else $match2 .= $match[$i];
+    }
+    switch ($state) {
+      case DOKU_LEXER_ENTER:
+        return array($state, $match2);
+      case DOKU_LEXER_MATCHED:
+        return array($state, $match2);
+      case DOKU_LEXER_UNMATCHED:
+        return array($state, $match2);
+      case DOKU_LEXER_EXIT:
+        return array($state, $match2);
+      case DOKU_LEXER_SPECIAL:
+        //break;
+    }
+    return false;
+    /*    if ($state == DOKU_LEXER_UNMATCHED)
     {
        return array($state, $match2);
     }
@@ -69,22 +72,20 @@ class syntax_plugin_mediasyntax_codeblock extends DokuWiki_Syntax_Plugin
 
   function render($mode, Doku_Renderer $renderer, $data)
   {
-      if($mode == 'xhtml')
-      {
-          list($state,$match) = $data;
-          $match=$data[1];
-          $state=$data[0];
-          switch ($state)
-          {
-                case DOKU_LEXER_ENTER :
-                    //$renderer->doc .= "enter$match";
-                case DOKU_LEXER_UNMATCHED :
-                    //$renderer->doc .= "<pre>$match</pre>";
-                case DOKU_LEXER_EXIT :
-                    if ($match != "") $renderer->doc .= "<pre>$match</pre>";
-          }
+    if ($mode == 'xhtml') {
+      list($state, $match) = $data;
+      $match = $data[1];
+      $state = $data[0];
+      switch ($state) {
+        case DOKU_LEXER_ENTER:
+          //$renderer->doc .= "enter$match";
+        case DOKU_LEXER_UNMATCHED:
+          //$renderer->doc .= "<pre>$match</pre>";
+        case DOKU_LEXER_EXIT:
+          if ($match != "") $renderer->doc .= "<pre>$match</pre>";
       }
-      return true;
+    }
+    return true;
   }
 }
 

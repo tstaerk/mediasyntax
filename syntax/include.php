@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Include Component of mediasyntax plugin: displays a wiki page within another
  *
@@ -11,13 +12,22 @@
 class syntax_plugin_mediasyntax_include extends DokuWiki_Syntax_Plugin
 {
 
-    function getType() { return 'substition'; }
-    function getSort() { return 303; }
-    function getPType() { return 'block'; }
+    function getType()
+    {
+        return 'substition';
+    }
+    function getSort()
+    {
+        return 303;
+    }
+    function getPType()
+    {
+        return 'block';
+    }
 
     function connectTo($mode)
     {
-        $this->Lexer->addSpecialPattern("{{.+?}}", $mode, 'plugin_mediasyntax_include');
+        $this->Lexer->addSpecialPattern("{[.+?]}", $mode, 'plugin_mediasyntax_include');
     }
 
     function handle($match, $state, $pos, Doku_Handler $handler)
@@ -27,7 +37,7 @@ class syntax_plugin_mediasyntax_include extends DokuWiki_Syntax_Plugin
         list($match, $flags) = explode('&', $match, 2);
         // break the pattern up into its parts
         list($page, $sect) = preg_split('/#/u', $match, 2);
-        $mode="page";
+        $mode = "page";
         return array($mode, $page, cleanID($sect), explode('&', $flags));
     }
 
