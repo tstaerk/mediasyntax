@@ -27,7 +27,7 @@ class syntax_plugin_mediasyntax_include extends DokuWiki_Syntax_Plugin
 
     function connectTo($mode)
     {
-        $this->Lexer->addSpecialPattern("{[.+?]}", $mode, 'plugin_mediasyntax_include');
+        $this->Lexer->addSpecialPattern("{{.+?}}", $mode, 'plugin_mediasyntax_include');
     }
 
     function handle($match, $state, $pos, Doku_Handler $handler)
