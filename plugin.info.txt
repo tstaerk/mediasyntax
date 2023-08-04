@@ -4,4 +4,4 @@ author Thorsten Staerk
 email  dev@staerk.de
 date   2023-08-04
 desc   Mediawiki syntax for Dokuwiki (comes with a converter)
-url    http://www.staerk.de/thorsten/mediasyntax
+url    https://www.dokuwiki.org/plugin:mediasyntax
